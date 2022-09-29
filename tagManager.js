@@ -1,7 +1,7 @@
 import * as Core from "./core.js"
+import * as PageSimulator from "./pageSimulator.js"
 
 const tagTemplate = document.getElementById("tag-template");
-const tagHolder = document.getElementById("tag-holder");
 
 const cards = [];
 
@@ -41,7 +41,18 @@ const tagDataDict = {
 
 };
 
-export function createCard(index, config)
+export function createCards(startIndex, amount, config)
+{
+	for (let i = startIndex; i < startIndex + amount; i++)
+	{
+		createCard(i, config, false);
+	}
+
+	PageSimulator.showTags(cards); // Add the cards to the page
+}
+
+// Creates a new card with the specified index and config
+export function createCard(index, config, redraw)
 {
 	let card = tagTemplate.content.firstElementChild.cloneNode(true);
 	cards.push(card);
@@ -49,7 +60,12 @@ export function createCard(index, config)
 
 	populateCard(card, config)
 
-	tagHolder.append(card);
+	if (redraw == true)
+	{
+		PageSimulator.showTags(cards); // Add the cards to the page
+	}
+
+	return card;
 }
 
 export function updateCards()
@@ -58,6 +74,15 @@ export function updateCards()
 	{
 		populateCard(card, Core.config);
 	}
+
+	PageSimulator.showTags(cards); // Add the cards to the page
+}
+
+export function clearCards()
+{
+	cards = [];
+
+	PageSimulator.showTags(cards); // Clear the cards on the page
 }
 
 function populateCard(card, config)
@@ -109,6 +134,18 @@ function populateCard(card, config)
 	else
 	{
 		tagDimensions.style.display = "none";
+	}
+
+	let tagMetaData = card.getElementsByClassName("tag-meta")[0];
+
+	if (tagType.style.display == "block" && tagDimensions.style.display == "block")
+	{
+		tagMetaData.style.display = "block";
+	}
+
+	else
+	{
+		tagMetaData.style.display = "none";
 	}
 
 }

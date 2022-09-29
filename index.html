@@ -8,18 +8,26 @@
     <link rel="stylesheet" href="./style.css">
   </head>
   <body>
-	<main id="page">
-		<article id="tag-holder">
-			<template id="tag-template">
-				<section class="tag-section">
-					<img class="tag-img">
-					<div class="tag-meta">
-						<p class="tag-info tag-type">TAG TYPE: #</p> 
-						<p class="tag-info tag-dimensions">TAG DIMENSIONS</p>
-					</div>
-				</section>
-			</template>
+
+	<!-- Templates -->
+
+	<template id="tag-template">
+		<section class="tag-section">
+			<img class="tag-img">
+			<div class="tag-meta">
+				<p class="tag-info tag-type">TAG TYPE: #</p> 
+				<p class="tag-info tag-dimensions">TAG DIMENSIONS</p>
+			</div>
+		</section>
+	</template>
+
+	<template id="page-template">
+
+		<article class="page">
 		</article>
+	</template>
+
+	<main id="pages">
 	</main>
 	
 	<aside id="generator-config">
@@ -43,6 +51,7 @@
 		<input type="range" id="size-selector-slider" name="size" min="10" max="180" value="165" step="1">
 
 
+
 		<fieldset>
 			<legend>Tag Labels</legend>
 		
@@ -62,15 +71,12 @@
 			</div>
 		</fieldset>
 
+		<div>
+			<label for="font-size-selector">Font Size (pt): </label>
+			<input type="number" id="font-size-selector" name="font-size" min="1" max="30" value="14">
+		</div>
 
-
-		<button id="print-button">Print</button>
-			Slider/text input for the tag image size (in mm)
-			
-			The number of tags to generate
-			the starting index to generate from
-		
-		If the tag section's height is greater than half the height of the page (which should be 11 in), then the tag should be centered on the page
+		<button id="print-button" onclick="window.print()">Print</button>
 	</aside>
 	<script type="module" src="core.js"></script>
   </body>

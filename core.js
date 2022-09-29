@@ -5,8 +5,11 @@ export const imageRepo = "https://github.com/AprilRobotics/apriltag-imgs/blob/ma
 
 export let config = ConfigHandler.getDefaultConfig(); 
 
-for (let i = 0; i < 10; i++)
-{
-	TagManager.createCard(i, config);
-}
+TagManager.createCards(0, 10, config);
 
+// Some extra code to set the width of the scrollbar on the page
+
+let pages = document.getElementById("pages");
+//let scrollbarWidth = pages.offsetWidth - pages.clientWidth;
+
+//pages.style.setProperty("--scrollbar-width", scrollbarWidth + "px");

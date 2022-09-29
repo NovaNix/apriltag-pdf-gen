@@ -31,7 +31,7 @@ sizeSelector.addEventListener("change", (event) => {
 	Core.config.tagDimensions = event.target.value;
 	sizeSlider.value = event.target.value;
 
-	root.style.setProperty("--tag-size", Core.config.tagDimensions + "mm");
+	root.style.setProperty("--true-tag-size", Core.config.tagDimensions + "mm");
 	TagManager.updateCards();
 });
 
@@ -39,7 +39,7 @@ sizeSlider.addEventListener("input", (event) => {
 	Core.config.tagDimensions = event.target.value;
 	sizeSelector.value = event.target.value;
 
-	root.style.setProperty("--tag-size", Core.config.tagDimensions + "mm");
+	root.style.setProperty("--true-tag-size", Core.config.tagDimensions + "mm");
 	TagManager.updateCards();
 });
 
@@ -59,3 +59,9 @@ document.getElementById("dimensions-toggle").addEventListener("change", (event) 
 	TagManager.updateCards();
 });
 
+let fontSizeSelector = document.getElementById("font-size-selector");
+
+fontSizeSelector.addEventListener("change", (event) => {
+	root.style.setProperty("--true-font-size", event.target.value + "pt");
+	TagManager.updateCards();
+});
