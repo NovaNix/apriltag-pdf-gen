@@ -1,0 +1,104 @@
+:root {
+    --tag-size: 165mm;
+    --tag-padding: calc(var(--tag-size) / 10);
+}
+
+html, body {
+    padding: 0;
+    margin: 0;
+    font-family: 'Open Sans', sans-serif;
+}
+
+/* Tag sections should have a dotted line around them to make it easier to cut them out */
+
+#tag-holder {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    justify-content: center;
+    align-content: flex-start;
+}
+
+.tag-section {
+    background-color: white;
+
+    border-color: gray;
+    border-style: dashed;
+    border-width: 1px;
+
+    width: min-content;
+    height: min-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
+    flex-shrink: 0;
+
+    page-break-inside: never;
+
+    padding: var(--tag-padding);
+}
+
+.tag-img {
+    image-rendering: crisp-edges;
+
+    width: var(--tag-size);
+    height: var(--tag-size)
+}
+
+.tag-meta {
+    margin-top: var(--tag-padding)
+}
+
+.tag-info {
+    width: 100%;
+    text-align: center;
+}
+
+#generator-config {
+    padding: 1em;
+
+    margin-left: 1em;
+
+    background-color: white;
+    border-color: gray;
+    border-style: solid;
+    border-width: 1px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    height: 100%;
+}
+
+@media screen {
+    body {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+
+    }
+    
+    #tag-holder {
+        background-color: dimgray;
+        width: 8.5in;
+        min-height: 11in;
+        flex-shrink: 0;
+    }
+
+    .tag-img {
+        border-color:salmon;
+        border-style: solid;
+        border-width: 1px;
+    }
+}
+
+/* The styling for the print and screen */
+@media print {
+    
+    #generator-config {
+        display: none;
+    }
+}
