@@ -65,3 +65,10 @@ fontSizeSelector.addEventListener("change", (event) => {
 	root.style.setProperty("--true-font-size", event.target.value + "pt");
 	TagManager.updateCards();
 });
+
+let marginSelector = document.getElementById("margin-selector");
+
+marginSelector.addEventListener("change", (event) => {
+	root.style.setProperty("--true-font-size", event.target.value + "pt");
+	TagManager.updateCards();
+});
