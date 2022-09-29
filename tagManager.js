@@ -138,7 +138,7 @@ function populateCard(card, config)
 
 	let tagMetaData = card.getElementsByClassName("tag-meta")[0];
 
-	if (tagType.style.display == "block" && tagDimensions.style.display == "block")
+	if (tagType.style.display == "block" || tagDimensions.style.display == "block")
 	{
 		tagMetaData.style.display = "block";
 	}

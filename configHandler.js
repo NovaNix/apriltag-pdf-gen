@@ -69,6 +69,6 @@ fontSizeSelector.addEventListener("change", (event) => {
 let marginSelector = document.getElementById("margin-selector");
 
 marginSelector.addEventListener("change", (event) => {
-	root.style.setProperty("--true-font-size", event.target.value + "pt");
+	root.style.setProperty("--true-page-margin", event.target.value + "mm");
 	TagManager.updateCards();
 });

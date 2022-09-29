@@ -122,7 +122,11 @@ html, body {
         background-color: white;
 
         margin: 0;
+        margin-left: auto;
+        margin-right: auto;
         margin-bottom: 1em;
+
+        max-width: 8.5in;
 
         /* Add a shadow to make it stand out a little */
         box-shadow: 0 0 0.5em 0.5em gray;

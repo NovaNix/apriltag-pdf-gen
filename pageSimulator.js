@@ -45,12 +45,16 @@ export function showTags(tags)
     {
         pages[0].append(tags[0]); // Add the tag to the first page to get the dimensions of the tag
 
+        let pageDimensions = getContentDimensions(pages[0]);
+
         let tagWidth = tags[0].clientWidth;
         let tagHeight = tags[0].clientHeight;
 
-        let pagesPerX = Math.floor(pages[0].clientWidth / tagWidth);
-        let pagesPerY = Math.floor(pages[0].clientHeight / tagHeight);
+        let pagesPerX = Math.floor(pageDimensions.width / tagWidth);
+        let pagesPerY = Math.floor(pageDimensions.height / tagHeight);
         let tagsPerPage = pagesPerX * pagesPerY;
+
+        console.log("Page dimensions: " + pageDimensions.width + "x" + pageDimensions.height);
 
         console.log("Tag width: " + tagWidth + "px");
         console.log("Tag height: " + tagHeight + "px");
@@ -76,6 +80,25 @@ export function showTags(tags)
     
     }   
 
+}
+
+function getContentDimensions(element)
+{
+    // Code borrowed from https://stackoverflow.com/questions/25197184/get-the-height-of-an-element-minus-padding-margin-border-widths
+
+    let cs = getComputedStyle(element);
+
+    let paddingX = parseFloat(cs.paddingLeft) + parseFloat(cs.paddingRight);
+    let paddingY = parseFloat(cs.paddingTop) + parseFloat(cs.paddingBottom);
+
+    let borderX = parseFloat(cs.borderLeftWidth) + parseFloat(cs.borderRightWidth);
+    let borderY = parseFloat(cs.borderTopWidth) + parseFloat(cs.borderBottomWidth);
+
+    // Element width and height minus padding and border
+    let elementWidth = element.offsetWidth - paddingX - borderX;
+    let elementHeight = element.offsetHeight - paddingY - borderY;
+
+    return {width: elementWidth, height: elementHeight};
 }
 
 export function clearPages()
