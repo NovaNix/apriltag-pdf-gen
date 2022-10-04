@@ -69,6 +69,8 @@
 				length: length
 			};
 
+			tagsAdded += length;
+
 			pageData.push(page);
 		}
 		
