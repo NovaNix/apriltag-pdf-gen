@@ -10,9 +10,9 @@
 	--tag-padding: calc(var(--tag-size) / 10);
 	--page-margin: calc(var(--true-page-margin) * var(--sim-scale));
 
-	--padding-visual-red: red;
-	--padding-visual-light-red: salmon;
-	--padding-stripe-size: 10px;
+	--padding-visual-red: #ed8e8e;
+	--padding-visual-light-red: white;
+	--padding-stripe-size: 5px;
 	/* #bc6060 */
 }
 

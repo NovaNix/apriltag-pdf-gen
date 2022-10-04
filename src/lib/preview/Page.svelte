@@ -27,9 +27,9 @@
 			background: repeating-linear-gradient(
   				45deg,
   				var(--padding-visual-red),
-  				var(--padding-visual-red) 10px,
-  				var(--padding-visual-light-red) 10px,
-  				var(--padding-visual-light-red) 20px
+  				var(--padding-visual-red) var(--padding-stripe-size),
+  				var(--padding-visual-light-red) var(--padding-stripe-size),
+  				var(--padding-visual-light-red) calc(var(--padding-stripe-size) * 2)
 			);
 
 			
