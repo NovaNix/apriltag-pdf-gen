@@ -8,11 +8,12 @@
 
 	--tag-size: calc(var(--true-tag-size) * var(--sim-scale));;
 	--tag-padding: calc(var(--tag-size) / 10);
-	--tag-margin: calc(var(--true-page-margin) * var(--sim-scale));
+	--page-margin: calc(var(--true-page-margin) * var(--sim-scale));
 
-	--true-font-size: 14pt;
-	--font-size: calc(var(--true-font-size) * var(--sim-scale));
-
+	--padding-visual-red: red;
+	--padding-visual-light-red: salmon;
+	--padding-stripe-size: 10px;
+	/* #bc6060 */
 }
 
 html, body {
@@ -83,6 +84,7 @@ html, body {
 	.page {
 		width: 8.5in;
 		height: 11in;
+		background-color: white;
 		break-after: always;
 	}
 

@@ -1,6 +1,29 @@
 <script>
 	import {config} from './stores.js';
 
+	const pageWidth = 215.9; // The width of a page in mm
+	const pageHeight = 279.4; // The height of a page in mm
+
+	let maxTagSize = calculateMaxTagSize();
+
+	function calculateMaxTagSize()
+	{
+		let maxWidth = ((pageWidth) - ($config.pageMargins * 2)) - (2 * ($config.tagDimensions / 10));
+		let maxHeight = ((pageHeight) - ($config.pageMargins * 2)) - (2 * ($config.tagDimensions / 10));
+
+		return Math.min(maxWidth, maxHeight);
+	}
+
+	// Handle updating the max size of tags for the tag input
+	config.subscribe((value) => {
+		maxTagSize = calculateMaxTagSize();
+
+		if (value.tagDimensions > maxTagSize)
+		{
+			$config.tagDimensions = Math.floor(maxTagSize);
+		}
+	});
+
 	function printPage()
 	{
 		window.print();
@@ -24,8 +47,8 @@
 	
 	<label for="size-selector">Size (mm)</label>
 	<!-- A text input next to a slider to pick the width of the tag -->
-	<input type="number" id="size-selector" name="size" min="10" max="180" bind:value={$config.tagDimensions}>
-	<input type="range" id="size-selector-slider" name="size" min="10" max="180" step="1" bind:value={$config.tagDimensions}>
+	<input type="number" id="size-selector" name="size" min="10" max={maxTagSize} bind:value={$config.tagDimensions}>
+	<input type="range" id="size-selector-slider" name="size" min="10" max={maxTagSize} step="1" bind:value={$config.tagDimensions}>
 
 	<div>
 		<label for="margin-selector">Page Margin (mm)</label>
@@ -61,11 +84,6 @@
 		</div>
 	</fieldset>
 
-	<div>
-		<label for="font-size-selector">Font Size (pt): </label>
-		<input type="number" id="font-size-selector" name="font-size" min="1" max="30" bind:value={$config.fontSize}>
-	</div>
-
 	<button id="print-button" on:click={printPage}>Print</button>
 </aside>
 
@@ -86,5 +104,7 @@
 
 	    width: min-content;
 	    height: 100%;
+
+		overflow-y: auto;
 	}
 </style>
