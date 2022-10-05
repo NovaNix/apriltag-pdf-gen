@@ -1,5 +1,7 @@
 <script>
 	import {config} from './stores.js';
+	import {tagData} from "./preview/Tag.svelte";
+	import InfoPanel from "./InfoPanel.svelte";
 
 	const pageWidth = 215.9; // The width of a page in mm
 	const pageHeight = 279.4; // The height of a page in mm
@@ -14,7 +16,7 @@
 		return Math.min(maxWidth, maxHeight);
 	}
 
-	// Handle updating the max size of tags for the tag input
+	// Handle updating the config constraints to match other config settings
 	config.subscribe((value) => {
 		maxTagSize = calculateMaxTagSize();
 
@@ -22,12 +24,24 @@
 		{
 			$config.tagDimensions = Math.floor(maxTagSize);
 		}
+
+		if (value.startingIndex > (tagData[$config.tagType].count - 1))
+		{
+			$config.startingIndex = (tagData[$config.tagType].count - 1);
+		}
+
+		if (value.tagCount > (tagData[value.tagType].count - value.startingIndex))
+		{
+			$config.tagCount = (tagData[value.tagType].count - value.startingIndex);
+		}
+
 	});
 
 	function printPage()
 	{
 		window.print();
 	}
+
 </script>
 
 <aside id="generator-config">
@@ -44,6 +58,16 @@
 		<option value="tagStandard41h12" selected>tagStandard41h12</option>
 		<option value="tagStandard52h13">tagStandard52h13</option>
 	</select>
+
+	<details>
+		<summary>Tag Stats</summary>
+		<div>
+			<p>Max tags: {tagData[$config.tagType].count}</p>
+			<p>Dimensions: {tagData[$config.tagType].bitwidth}px x {tagData[$config.tagType].bitwidth}px</p>
+		</div>
+	</details>	  
+
+	
 	
 	<label for="size-selector">Size (mm)</label>
 	<!-- A text input next to a slider to pick the width of the tag -->
@@ -56,13 +80,13 @@
 	</div>
 
 	<div>
-		<label for="tag-count-selector">Starting Index</label>
-		<input type="number" id="tag-index-selector" name="tag-index-selector" min="0" bind:value={$config.startingIndex}>
+		<label for="tag-index-selector">Starting Index</label>
+		<input type="number" id="tag-index-selector" name="tag-index-selector" min="0" max={tagData[$config.tagType].count - 1}  bind:value={$config.startingIndex}>
 	</div>
 
 	<div>
 		<label for="tag-count-selector">Tag Count</label>
-		<input type="number" id="tag-count-selector" name="tag-count-selector" min="1" bind:value={$config.tagCount}>
+		<input type="number" id="tag-count-selector" name="tag-count-selector" min="1" max={tagData[$config.tagType].count - $config.startingIndex} bind:value={$config.tagCount}>
 	</div>
 
 	<fieldset>
@@ -85,6 +109,9 @@
 	</fieldset>
 
 	<button id="print-button" on:click={printPage}>Print</button>
+
+	<InfoPanel/>
+
 </aside>
 
 <style>

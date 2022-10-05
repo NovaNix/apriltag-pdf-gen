@@ -27,13 +27,7 @@
 		let tagsPerX = Math.floor(contentWidth / tagBlockSize);
 		let tagsPerY = Math.floor(contentHeight / tagBlockSize);
 
-		console.log(`Tag Size: ${tagBlockSize}`);
-		console.log(`True page width: ${pageWidth}`)
-		console.log(`Tags per x: ${tagsPerX} (page width: ${contentWidth}`);
-		console.log(`Tags per y: ${tagsPerY} (page height: ${contentHeight})`);
-
 		let tagsPerPage = tagsPerX * tagsPerY;
-		//let pagesNeeded = Math.ceil($config.tagCount / tagsPerPage);
 
 		if (tagsPerPage == 0)
 		{

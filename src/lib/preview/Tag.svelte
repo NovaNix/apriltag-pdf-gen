@@ -1,60 +1,81 @@
+<script context="module">
+    export const tagData = {
+		"tag16h5": {
+			name: "16h5",
+			tagPrefix: "tag16_05_",
+			count: 30,
+			bitwidth: 8
+		},
+
+		"tag25h9": {
+			name: "25h9",
+			tagPrefix: "tag25_09_",
+			count: 35,
+			bitwidth: 9
+		},
+
+		"tag36h11": {
+			name: "36h11",
+			tagPrefix: "tag36_11_",
+			count: 587,
+			bitwidth: 10
+		},
+
+		"tagCircle21h7": {
+			name: "21h7",
+			tagPrefix: "tag21_07_",
+			count: 38,
+			bitwidth: 9
+		}, 
+
+		"tagCircle49h12": {
+			name: "49h12",
+			tagPrefix: "tag49_12_",
+			count: 65698,
+			bitwidth: 11
+		},
+
+		"tagCustom48h12": {
+			name: "48h12",
+			tagPrefix: "tag48_12_",
+			count: 42211,
+			bitwidth: 10
+		},
+
+		"tagStandard41h12": {
+			name: "41h12",
+			tagPrefix: "tag41_12_",
+			count: 2115,
+			bitwidth: 9
+		},
+
+		"tagStandard52h13": {
+			name: "52h13",
+			tagPrefix: "tag52_13_",
+			count: 48714,
+			bitwidth: 10
+		}
+	};
+</script>
+
+
 <script>
 	import {config} from '../stores.js';
 	
 	const imageRepo = "https://github.com/AprilRobotics/apriltag-imgs/blob/master/"; 
 
 	// Contains the tag prefix and other info for each tag type
-	const tagDataDict = {
-		"tag16h5": {
-			name: "16h5",
-			tagPrefix: "tag16_05_",
-		},
-
-		"tag25h9": {
-			name: "25h9",
-			tagPrefix: "tag25_09_",
-		},
-
-		"tag36h11": {
-			name: "36h11",
-			tagPrefix: "tag36_11_",
-		},
-
-		"tagCircle21h7": {
-			name: "21h7",
-			tagPrefix: "tag21_07_",
-		}, 
-
-		"tagCircle49h12": {
-			name: "49h12",
-			tagPrefix: "tag49_12_",
-		},
-
-		"tagCustom48h12": {
-			name: "48h12",
-			tagPrefix: "tag48_12_",
-		},
-
-		"tagStandard41h12": {
-			name: "41h12",
-			tagPrefix: "tag41_12_"
-		},
-
-		"tagStandard52h13": {
-			name: "52h13",
-			tagPrefix: "tag52_13_"
-		}
-	};
+	
 
 	export let index;
 
-	$: fileName = tagDataDict[$config.tagType].tagPrefix + String(index).padStart(5, "0") + ".png";
+	$: fileName = tagData[$config.tagType].tagPrefix + String(index).padStart(5, "0") + ".png";
 	$: source = `${imageRepo}${$config.tagType}/${fileName}?raw=true`;
 </script>
 
 <section class="tag-section">
 	<img class="tag-img" src="{source}" alt="tag {index}">
-	{#if $config.dataToggles.type}<p class="tag-info tag-type">{tagDataDict[$config.tagType].name}</p>{/if}
+	{#if $config.dataToggles.type}<p class="tag-info tag-type">{tagData[$config.tagType].name}</p>{/if}
 	{#if $config.dataToggles.number}<p class="tag-info tag-index"> {index}</p>{/if}
 	{#if $config.dataToggles.dimensions}<p class="tag-info tag-dimensions">{$config.tagDimensions}mm</p>{/if}
 </section>
