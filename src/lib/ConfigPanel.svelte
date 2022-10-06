@@ -80,8 +80,8 @@
 	</div>
 
 	<div>
-		<label for="printer-margin-selector">Page Margin (mm)</label>
-		<input type="number" id="printer-margin-selector" name="printer-margin" min="0" bind:value={$config.pageMargins}>
+		<label for="printer-margin-selector">Printer Margin (mm)</label>
+		<input type="number" id="printer-margin-selector" name="printer-margin" min="0" bind:value={$config.printerMargin}>
 	</div>
 
 	<div>

@@ -20,6 +20,7 @@ export const config = writable({
 config.subscribe(value => {
 	setCSSVariable('--true-tag-size', value.tagDimensions + "mm");
 	setCSSVariable('--true-page-margin', value.pageMargins + 'mm');
+	setCSSVariable('--printer-margin', value.printerMargin + 'mm');
 });
 
 function setCSSVariable(name, value) {
