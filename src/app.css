@@ -2,6 +2,7 @@
 	--true-tag-size: 165mm;
 
 	--true-page-margin: 25mm;
+	--true-printer-margin: 0mm;
 
 	--page-aspect-ratio: 8.5/11;
 	--sim-scale: 1;
@@ -9,6 +10,7 @@
 	--tag-size: calc(var(--true-tag-size) * var(--sim-scale));;
 	--tag-padding: calc(var(--tag-size) / 10);
 	--page-margin: calc(var(--true-page-margin) * var(--sim-scale));
+	--printer-margin: calc(var(--true-printer-margin) * var(--sim-scale));
 
 	--padding-visual-red: #ed8e8e;
 	--padding-visual-light-red: white;
@@ -31,27 +33,6 @@ html, body {
 		height: 100vh;
 		background-color: Gainsboro;
 	}
-	
-	#pages {
-		overflow-y: scroll;
-		flex-grow: 2;
-		height: 100vh;
-		flex-shrink: 0;
-		width: 60%;
-		padding: 1em;
-		display: block;
-	}
-
-	.page {
-		background-color: white;
-		margin: 0;
-		margin-left: auto;
-		margin-right: auto;
-		margin-bottom: 1em;
-		max-width: 8.5in;
-		/* Add a shadow to make it stand out a little */
-		box-shadow: 0 0 0.5em 0.5em gray;
-	}
 
 	.tag-img {
 		border-color:salmon;
@@ -73,19 +54,6 @@ html, body {
 
 	#generator-config {
 		display: none !important;
-	}
-
-	#pages {
-		width: 100%;
-		height: 100%;
-		display: block;
-	}
-
-	.page {
-		width: 8.5in;
-		height: 11in;
-		background-color: white;
-		break-after: always;
 	}
 
 	.tag-img {

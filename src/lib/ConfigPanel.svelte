@@ -80,6 +80,11 @@
 	</div>
 
 	<div>
+		<label for="printer-margin-selector">Page Margin (mm)</label>
+		<input type="number" id="printer-margin-selector" name="printer-margin" min="0" bind:value={$config.pageMargins}>
+	</div>
+
+	<div>
 		<label for="tag-index-selector">Starting Index</label>
 		<input type="number" id="tag-index-selector" name="tag-index-selector" min="0" max={tagData[$config.tagType].count - 1}  bind:value={$config.startingIndex}>
 	</div>

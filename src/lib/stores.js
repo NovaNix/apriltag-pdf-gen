@@ -4,6 +4,7 @@ export const config = writable({
 	tagType: "tagStandard41h12",
 		tagDimensions: 165,
 		pageMargins: 25,
+		printerMargin: 0,
 
 		startingIndex: 0,
 		tagCount: 10,
@@ -25,5 +26,8 @@ function setCSSVariable(name, value) {
 	document.documentElement.style.setProperty(name, value);
 };
 
-export const scale = writable(1);
+export const previewScale = writable(1);
+previewScale.subscribe(value => {
+	setCSSVariable("--sim-scale", value);
+});
 

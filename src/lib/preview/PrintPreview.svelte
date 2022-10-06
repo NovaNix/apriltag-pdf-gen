@@ -5,7 +5,7 @@
 	const pageWidth = 215.9; // The width of a page in mm
 	const pageHeight = 279.4; // The height of a page in mm
 
-	//$: range = 
+	let previewWidth;
 
 	let pageData = [
 		{
@@ -76,9 +76,36 @@
 
 </script>
 
-<main id="pages">
-	{#each pageData as page}
+<main id="preview">
+	<section id="pages" bind:clientWidth={previewWidth}>
+		{#each pageData as page}
 		<Page {...page}/>
-	{/each}
-	
+		{/each}
+	</section>
 </main>
+
+<style>
+	@media screen {
+		#preview {
+			width: 60%;
+			overflow-y: scroll;
+			flex-grow: 2;
+			height: 100vh;
+			flex-shrink: 0;
+			padding: 1em;
+			display: block;
+		}
+		
+		#pages {
+			max-width: 8.5in;
+		}
+	}
+
+	@media print {
+		#pages {
+			width: 100%;
+			height: 100%;
+			display: block;
+		}
+	}
+</style>
