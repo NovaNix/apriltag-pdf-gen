@@ -32,3 +32,7 @@ previewScale.subscribe(value => {
 	setCSSVariable("--sim-scale", value);
 });
 
+export const previewWidth = writable(1);
+previewWidth.subscribe(value => {
+	previewScale.set(value / (8.5 * 96));
+});

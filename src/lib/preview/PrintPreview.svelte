@@ -1,11 +1,10 @@
 <script>
-	import {config} from '../stores.js';
+	import {config, previewWidth} from '../stores.js';
 	import Page from './Page.svelte';
+	import PreviewInfo from './PreviewInfo.svelte';
 
 	const pageWidth = 215.9; // The width of a page in mm
 	const pageHeight = 279.4; // The height of a page in mm
-
-	let previewWidth;
 
 	let pageData = [
 		{
@@ -19,13 +18,17 @@
 	{
 		pageData = [];
 
-		let contentWidth = (pageWidth) - ($config.pageMargins * 2) - ($config.printerMargin * 2);
-		let contentHeight = (pageHeight) - ($config.pageMargins * 2) - ($config.printerMargin * 2);
+		let marginSize = ($config.pageMargins * 2) + ($config.printerMargin * 2);
 
-		let tagBlockSize = ($config.tagDimensions + ($config.printerMargin * 2)) + (2 * ($config.tagDimensions / 10)); // The size of a tag block, including the padding (padding is size/10 on each side)
+		let usableWidth = (pageWidth - marginSize);
+		let usableHeight = (pageHeight - marginSize);
 
-		let tagsPerX = Math.floor(contentWidth / tagBlockSize);
-		let tagsPerY = Math.floor(contentHeight / tagBlockSize);
+		let tagBlockSize = ($config.tagDimensions) * 1.2; // The size of a tag block, including the padding (padding is size/10 on each side)
+
+		let tagsPerX = Math.floor(usableWidth / tagBlockSize);
+		let tagsPerY = Math.floor(usableHeight / tagBlockSize);
+
+		console.log(`Tags per page: ${tagsPerX} x ${tagsPerY}`);
 
 		let tagsPerPage = tagsPerX * tagsPerY;
 
@@ -77,11 +80,12 @@
 </script>
 
 <main id="preview">
-	<section id="pages" bind:clientWidth={previewWidth}>
+	<section id="pages" bind:clientWidth={$previewWidth}>
 		{#each pageData as page}
 		<Page {...page}/>
 		{/each}
 	</section>
+	<PreviewInfo/>
 </main>
 
 <style>
@@ -94,6 +98,8 @@
 			flex-shrink: 0;
 			padding: 1em;
 			display: block;
+			box-sizing: border-box;
+			position: relative;
 		}
 		
 		#pages {

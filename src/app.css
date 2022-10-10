@@ -9,9 +9,9 @@
 	--page-aspect-ratio: 8.5/11;
 	--sim-scale: 1;
 
-	--tag-size: calc(calc(var(--true-tag-size) + var(--size-offset)) * var(--sim-scale));;
+	--tag-size: calc(var(--true-tag-size) * var(--sim-scale));
 	--tag-padding: calc(var(--tag-size) / 10);
-	--page-margin: calc(calc(var(--true-page-margin) + var(--size-offset)) * var(--sim-scale));
+	--page-margin: calc(var(--true-page-margin) * var(--sim-scale));
 
 	--padding-visual-red: #ed8e8e;
 	--padding-visual-light-red: white;

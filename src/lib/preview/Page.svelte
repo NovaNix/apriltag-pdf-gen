@@ -4,32 +4,25 @@
 	export let start; // The starting index of the tags on this page
 	export let length; // The number of tags to have on this page
 
-	let previewWidth;
-	let previewHeight;
-
-	$: tags = [...Array(length).keys()].map(i => i + start); // An array of the indexes of tags to be drawn on this page
-
-
-
 </script>
 
 
 <article class="page" >
 	
-	<!-- Page content exists to keep the background of the page white while the border is colored in the preview -->
-	<div class="page-content">
-		{#each tags as tag}
-			<Tag index={tag}/>
-		{/each}
+	<div class="printable-area">
+		<div class="page-content">
+			{#each Array(length) as _, i}
+				<Tag index={i + start}/>
+			{/each}
+		</div>
 	</div>
-	
 	
 </article>
 
 <style>
 	@media screen {
 		.page {
-			background-color: white;
+			background-color: var(--padding-visual-red);
 			margin: 0;
 			margin-left: auto;
 			margin-right: auto;
@@ -38,6 +31,16 @@
 			/* Add a shadow to make it stand out a little */
 			box-shadow: 0 0 0.5em 0.5em gray;
 			
+			
+
+			/* Add an internal border to show the printer margin (TODO: CHANGE COLOR)*/
+			/*box-shadow: 0 0 0 var(--printer-margin) blue;*/
+			
+			padding: var(--printer-margin);
+
+		}
+
+		.printable-area {
 			/* Apply a red stripe to the page background */
 			background: repeating-linear-gradient(
   				45deg,
@@ -47,13 +50,12 @@
   				var(--padding-visual-light-red) calc(var(--padding-stripe-size) * 2)
 			);
 
-			/* Add an internal border to show the printer margin (TODO: CHANGE COLOR)*/
-			/*box-shadow: 0 0 0 var(--printer-margin) blue;*/
-			padding: calc(var(--page-margin) + var(--printer-margin));
+			padding: var(--page-margin);
 		}
 
 		.page-content {
-
+			box-sizing: border-box;
+			
 			box-shadow: 0 0 0 min(var(--padding-stripe-size), var(--page-margin)) var(--padding-visual-red);
 			
 		}
@@ -86,10 +88,24 @@
 		
 	}
 
+	.printable-area {
+		/* border-color: black;
+		border-width: calc(1mm * var(--sim-scale));
+		border-style: solid; */
+
+		box-shadow: inset 0 0 0 calc(1mm * var(--sim-scale)) black;
+
+		width: 100%;
+		height: 100%;
+
+		box-sizing: border-box;
+	}
+
 	.page {
 	    
 	    aspect-ratio: var(--page-aspect-ratio);
 
+		
 	    
 		box-sizing: border-box;
 	}

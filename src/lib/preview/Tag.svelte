@@ -89,8 +89,13 @@
     	border-style: dashed;
     	border-width: 1px;
 
-    	width: calc(var(--tag-size) + calc(2 * var(--tag-padding)));
+    	/*width: calc(var(--tag-size) + calc(2 * var(--tag-padding)));
 		height: calc(var(--tag-size) + calc(2 * var(--tag-padding)));
+		box-sizing: border-box;
+		*/
+		padding: var(--tag-padding);
+		width: var(--tag-size);
+		height: var(--tag-size);
     	display: flex;
     	flex-direction: column;
     	justify-content: center;
@@ -100,7 +105,8 @@
 
     	flex-shrink: 0;
 		overflow: hidden;
-
+		
+		aspect-ratio: 1;
 	}
 
 	.tag-img {

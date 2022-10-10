@@ -10,8 +10,14 @@
 
 	function calculateMaxTagSize()
 	{
-		let maxWidth = ((pageWidth) - ($config.pageMargins * 2)) - (2 * ($config.tagDimensions / 10));
-		let maxHeight = ((pageHeight) - ($config.pageMargins * 2)) - (2 * ($config.tagDimensions / 10));
+		let marginSize = ($config.pageMargins * 2) + ($config.printerMargin * 2);
+
+		let usableWidth = (pageWidth - marginSize);
+		let usableHeight = (pageHeight - marginSize);
+
+		// Calculate the max width and height by accounting for tag margins
+		let maxWidth = usableWidth * 0.8;
+		let maxHeight = usableHeight * 0.8;
 
 		return Math.min(maxWidth, maxHeight);
 	}
@@ -20,9 +26,11 @@
 	config.subscribe((value) => {
 		maxTagSize = calculateMaxTagSize();
 
+		console.log(`Max tag size: ${maxTagSize}`);
+
 		if (value.tagDimensions > maxTagSize)
 		{
-			$config.tagDimensions = Math.floor(maxTagSize);
+			$config.tagDimensions = maxTagSize;
 		}
 
 		if (value.startingIndex > (tagData[$config.tagType].count - 1))
@@ -71,8 +79,8 @@
 	
 	<label for="size-selector">Size (mm)</label>
 	<!-- A text input next to a slider to pick the width of the tag -->
-	<input type="number" id="size-selector" name="size" min="10" max={maxTagSize} bind:value={$config.tagDimensions}>
-	<input type="range" id="size-selector-slider" name="size" min="10" max={maxTagSize} step="1" bind:value={$config.tagDimensions}>
+	<input type="number" id="size-selector" name="size" min="10" max={maxTagSize} step="0.1" bind:value={$config.tagDimensions}>
+	<input type="range" id="size-selector-slider" name="size" min="10" max={maxTagSize} step="0.1" bind:value={$config.tagDimensions}>
 
 	<div>
 		<label for="margin-selector">Page Margin (mm)</label>
@@ -81,7 +89,7 @@
 
 	<div>
 		<label for="printer-margin-selector">Printer Margin (mm)</label>
-		<input type="number" id="printer-margin-selector" name="printer-margin" min="0" bind:value={$config.printerMargin}>
+		<input type="number" id="printer-margin-selector" name="printer-margin" min="0" step="1" bind:value={$config.printerMargin}>
 	</div>
 
 	<div>
