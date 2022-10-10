@@ -16,8 +16,8 @@
 		let usableHeight = (pageHeight - marginSize);
 
 		// Calculate the max width and height by accounting for tag margins
-		let maxWidth = usableWidth * 0.8;
-		let maxHeight = usableHeight * 0.8;
+		let maxWidth = (usableWidth * 5) / 6;
+		let maxHeight = (usableHeight * 5) / 6;
 
 		return Math.min(maxWidth, maxHeight);
 	}
