@@ -1,26 +1,47 @@
 import { writable } from 'svelte/store';
+import {pageWidth, pageHeight} from "./preview/Page.svelte";
 
-export const config = writable({
+const defaultConfig = {
 	tagType: "tagStandard41h12",
-		tagDimensions: 165,
+		tagDimensions: 100,
 		pageMargins: 25,
-		printerMargin: 0,
+		printerMarginX: 0,
+		printerMarginY: 0,
 
 		startingIndex: 0,
-		tagCount: 10,
-
+		tagCount: 1,
 
 		dataToggles: {
 			type: true,
 			number: true,
 			dimensions: true
 		}
-});
+}
+
+let savedConfig = JSON.parse(localStorage.getItem("apriltag-pdf-generator-config"));
+
+if (savedConfig == null)
+{
+	savedConfig = {...defaultConfig};
+}
+
+export const config = writable(savedConfig);
 
 config.subscribe(value => {
 	setCSSVariable('--true-tag-size', value.tagDimensions + "mm");
 	setCSSVariable('--true-page-margin', value.pageMargins + 'mm');
-	setCSSVariable('--printer-margin', value.printerMargin + 'mm');
+	setCSSVariable('--printer-margin-x', value.printerMarginX + 'mm');
+	setCSSVariable('--printer-margin-y', value.printerMarginY + 'mm');
+
+	let contentAreaWidth = pageWidth - (2 * value.printerMarginX);
+	let contentAreaHeight = pageHeight - (2 * value.printerMarginY);
+
+	setCSSVariable('--scale-x', (pageWidth / contentAreaWidth));
+	setCSSVariable('--scale-y', (pageHeight / contentAreaHeight));
+
+	// Save the config
+	localStorage.setItem("apriltag-pdf-generator-config", JSON.stringify(value));
+	console.log("Saving config");
 });
 
 function setCSSVariable(name, value) {

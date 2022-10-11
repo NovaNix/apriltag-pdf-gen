@@ -1,22 +1,27 @@
 :root {
-	--true-tag-size: 165mm;
+	--true-tag-size: 100mm;
 
 	--true-page-margin: 25mm;
-	--printer-margin: 0mm;
 
-	--size-offset: calc(var(--printer-margin) * 2);
+	--printer-margin-x: 0mm;
+	--printer-margin-y: 0mm;
+
+	--x-scale: 1;
+	--y-scale: 1;
 
 	--page-aspect-ratio: 8.5/11;
 	--sim-scale: 1;
 
-	--tag-size: calc(var(--true-tag-size) * var(--sim-scale));
-	--tag-padding: calc(var(--tag-size) / 10);
-	--page-margin: calc(var(--true-page-margin) * var(--sim-scale));
+	--tag-size-x: calc(var(--true-tag-size) * var(--sim-scale));
+	--tag-size-y: calc(var(--true-tag-size) * var(--sim-scale));
+	--tag-padding-x: calc(var(--tag-size-x) / 10);
+	--tag-padding-y: calc(var(--tag-size-y) / 10);
+	--page-margin-x: calc(var(--true-page-margin) * var(--sim-scale));
+	--page-margin-y: calc(var(--true-page-margin) * var(--sim-scale));
 
 	--padding-visual-red: #ed8e8e;
 	--padding-visual-light-red: white;
 	--padding-stripe-size: 5px;
-	/* #bc6060 */
 }
 
 html, body {
@@ -47,18 +52,26 @@ html, body {
 	
 	:root {
 		--sim-scale: 1 !important;
+		/* The X and Y scale represent how much to scale the contents of the page to get dimensional accuracy with the printer margins */
+
+		--tag-size-x: calc(var(--true-tag-size) * var(--x-scale));
+		--tag-size-y: calc(var(--true-tag-size) * var(--y-scale));
+
+		--page-margin-x: calc(var(--true-page-margin) * var(--x-scale));
+		--page-margin-y: calc(var(--true-page-margin) * var(--y-scale));
 	}
 
 	body {
 		background-color: black;
+		display: contents;
+	}
+
+	.page {
+		display: block;
 	}
 
 	#generator-config {
 		display: none !important;
-	}
-
-	.tag-img {
-		width: var(--true-tag-size);
 	}
 
 }

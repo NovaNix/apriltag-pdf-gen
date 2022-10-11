@@ -3,8 +3,7 @@
 	import Page from './Page.svelte';
 	import PreviewInfo from './PreviewInfo.svelte';
 
-	const pageWidth = 215.9; // The width of a page in mm
-	const pageHeight = 279.4; // The height of a page in mm
+	import {pageWidth, pageHeight} from "./Page.svelte";
 
 	let pageData = [
 		{
@@ -18,10 +17,11 @@
 	{
 		pageData = [];
 
-		let marginSize = ($config.pageMargins * 2) + ($config.printerMargin * 2);
-
-		let usableWidth = (pageWidth - marginSize);
-		let usableHeight = (pageHeight - marginSize);
+		let marginSizeX = ($config.pageMargins * 2) + ($config.printerMarginX * 2);
+		let marginSizeY = ($config.pageMargins * 2) + ($config.printerMarginY * 2);
+		
+		let usableWidth = (pageWidth - marginSizeX);
+		let usableHeight = (pageHeight - marginSizeY);
 
 		let tagBlockSize = ($config.tagDimensions) * 1.2; // The size of a tag block, including the padding (padding is size/10 on each side)
 
@@ -108,10 +108,14 @@
 	}
 
 	@media print {
+		#preview {
+			display: contents;
+		}
+		
 		#pages {
-			width: 100%;
-			height: 100%;
-			display: block;
+			/*width: 100%;
+			height: 100%;*/
+			display: contents;
 		}
 	}
 </style>

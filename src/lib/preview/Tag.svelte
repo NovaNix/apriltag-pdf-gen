@@ -64,9 +64,6 @@
 	
 	const imageRepo = "https://github.com/AprilRobotics/apriltag-imgs/blob/master/"; 
 
-	// Contains the tag prefix and other info for each tag type
-	
-
 	export let index;
 
 	$: fileName = tagData[$config.tagType].tagPrefix + String(index).padStart(5, "0") + ".png";
@@ -93,7 +90,7 @@
 		height: calc(var(--tag-size) + calc(2 * var(--tag-padding)));
 		box-sizing: border-box;
 		*/
-		padding: var(--tag-padding);
+		padding: var(--tag-padding-y) var(--tag-padding-x);
 		width: var(--tag-size);
 		height: var(--tag-size);
     	display: flex;
@@ -113,22 +110,22 @@
 	    image-rendering: crisp-edges;
 	    image-rendering: pixelated;
 
-	    width: var(--tag-size);
-	    height: var(--tag-size);
+	    width: var(--tag-size-x);
+	    height: var(--tag-size-y);
 	}
 
 	.tag-info {
 	    margin: 0;
 	    padding: 0;
-	    font-size: calc(var(--tag-padding) / 2);
-		height: var(--tag-padding);
+	    font-size: calc(var(--tag-padding-y) / 2);
+		height: var(--tag-padding-y);
 		text-align: center;
-		line-height: var(--tag-padding);
+		line-height: var(--tag-padding-y);
 	}
 
 	.tag-type {
 		position: absolute;
-		left: var(--tag-padding);
+		left: var(--tag-padding-x);
 		bottom: 0;
 		
 	}
@@ -141,7 +138,7 @@
 
 	.tag-dimensions {
 		position: absolute;
-		right: var(--tag-padding);
+		right: var(--tag-padding-x);
 		bottom: 0;
 	}
 

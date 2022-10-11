@@ -1,3 +1,8 @@
+<script context="module">
+	export const pageWidth = 215.9; // The width of a page in mm
+	export const pageHeight = 279.4; // The height of a page in mm
+</script>
+
 <script>
 	import Tag from './Tag.svelte';
 
@@ -31,12 +36,7 @@
 			/* Add a shadow to make it stand out a little */
 			box-shadow: 0 0 0.5em 0.5em gray;
 			
-			
-
-			/* Add an internal border to show the printer margin (TODO: CHANGE COLOR)*/
-			/*box-shadow: 0 0 0 var(--printer-margin) blue;*/
-			
-			padding: var(--printer-margin);
+			padding: var(--printer-margin-y) var(--printer-margin-x);
 
 		}
 
@@ -50,7 +50,7 @@
   				var(--padding-visual-light-red) calc(var(--padding-stripe-size) * 2)
 			);
 
-			padding: var(--page-margin);
+			padding: var(--page-margin-y) var(--page-margin-x);
 		}
 
 		.page-content {
@@ -61,15 +61,7 @@
 		}
 	}
 
-	@media print {
-		.page {
-			width: 8.5in;
-			height: 11in;
-			background-color: white;
-			break-after: always;
-			padding: var(--page-margin);
-		}
-	}
+	
 
 	.page-content {
 		background: white;
@@ -105,8 +97,19 @@
 	    
 	    aspect-ratio: var(--page-aspect-ratio);
 
-		
-	    
 		box-sizing: border-box;
+	}
+
+	@media print {
+		.page {
+			/*width: calc(8.5in - var(--printer-margin-x));
+			height: calc(11in - var(--printer-margin-y));*/
+			width: 8.5in;
+			height: 11in;
+			background-color: blue;
+			break-after: always;
+			padding: var(--page-margin-y) var(--page-margin-x);
+			box-shadow: inset 0 0 0 1mm black;
+		}
 	}
 </style>

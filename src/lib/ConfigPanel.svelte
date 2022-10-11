@@ -3,17 +3,17 @@
 	import {tagData} from "./preview/Tag.svelte";
 	import InfoPanel from "./InfoPanel.svelte";
 
-	const pageWidth = 215.9; // The width of a page in mm
-	const pageHeight = 279.4; // The height of a page in mm
+	import {pageWidth, pageHeight} from "./preview/Page.svelte";
 
 	let maxTagSize = calculateMaxTagSize();
 
 	function calculateMaxTagSize()
 	{
-		let marginSize = ($config.pageMargins * 2) + ($config.printerMargin * 2);
+		let marginSizeX = ($config.pageMargins * 2) + ($config.printerMarginX * 2);
+		let marginSizeY = ($config.pageMargins * 2) + ($config.printerMarginY * 2);
 
-		let usableWidth = (pageWidth - marginSize);
-		let usableHeight = (pageHeight - marginSize);
+		let usableWidth = (pageWidth - marginSizeX);
+		let usableHeight = (pageHeight - marginSizeY);
 
 		// Calculate the max width and height by accounting for tag margins
 		let maxWidth = (usableWidth * 5) / 6;
@@ -25,8 +25,6 @@
 	// Handle updating the config constraints to match other config settings
 	config.subscribe((value) => {
 		maxTagSize = calculateMaxTagSize();
-
-		console.log(`Max tag size: ${maxTagSize}`);
 
 		if (value.tagDimensions > maxTagSize)
 		{
@@ -88,8 +86,12 @@
 	</div>
 
 	<div>
-		<label for="printer-margin-selector">Printer Margin (mm)</label>
-		<input type="number" id="printer-margin-selector" name="printer-margin" min="0" step="1" bind:value={$config.printerMargin}>
+		<label for="printer-margin-selector">Printer Margin X (mm)</label>
+		<input type="number" id="printer-margin-selector" name="printer-margin" min="0" step="1" bind:value={$config.printerMarginX}>
+	</div>
+	<div>
+		<label for="printer-margin-selector">Printer Margin Y (mm)</label>
+		<input type="number" id="printer-margin-selector" name="printer-margin" min="0" step="1" bind:value={$config.printerMarginY}>
 	</div>
 
 	<div>
