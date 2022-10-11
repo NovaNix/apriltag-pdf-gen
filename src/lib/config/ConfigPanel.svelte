@@ -146,14 +146,13 @@
 	#generator-config {
 	    padding: 1em;
 
-	    
-
-	    display: flex;
-	    flex-direction: column;
-	    align-items: flex-start;
-
+		box-sizing: border-box;
 	    width: 100%;
 
 		overflow-y: auto;
+	}
+
+	h1 {
+		text-align: center;
 	}
 </style>
