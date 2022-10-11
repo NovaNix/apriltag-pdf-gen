@@ -136,6 +136,8 @@
 		</div>
 	</fieldset>
 
+	<!-- TODO: Add a toggle for the black page border used for dimensional accuracy testing -->
+
 	<button id="print-button" on:click={printPage}>Print</button>
 
 	<InfoPanel/>

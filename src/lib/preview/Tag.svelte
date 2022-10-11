@@ -111,6 +111,9 @@
 
 	    width: var(--tag-size-x);
 	    height: var(--tag-size-y);
+
+		/* Add a color behind the image to make sure that the image is the right size */
+		background-color: red;
 	}
 
 	.tag-info {
