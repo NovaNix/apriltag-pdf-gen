@@ -72,9 +72,12 @@
 
 <section class="tag-section">
 	<img class="tag-img" src="{source}" alt="tag {index}">
-	{#if $config.dataToggles.type}<p class="tag-info tag-type">{tagData[$config.tagType].name}</p>{/if}
-	{#if $config.dataToggles.number}<p class="tag-info tag-index"> {index}</p>{/if}
-	{#if $config.dataToggles.dimensions}<p class="tag-info tag-dimensions">{$config.tagDimensions}mm</p>{/if}
+	{#if $config.dataToggles.enabled}
+		{#if $config.dataToggles.type}<p class="tag-info tag-type">{tagData[$config.tagType].name}</p>{/if}
+		{#if $config.dataToggles.number}<p class="tag-info tag-index"> {index}</p>{/if}
+		{#if $config.dataToggles.dimensions}<p class="tag-info tag-dimensions">{$config.tagDimensions}mm</p>{/if}
+	{/if}
+	
 </section>
 
 <style>
@@ -86,10 +89,6 @@
     	border-style: dashed;
     	border-width: 1px;
 
-    	/*width: calc(var(--tag-size) + calc(2 * var(--tag-padding)));
-		height: calc(var(--tag-size) + calc(2 * var(--tag-padding)));
-		box-sizing: border-box;
-		*/
 		padding: var(--tag-padding-y) var(--tag-padding-x);
 		width: var(--tag-size);
 		height: var(--tag-size);

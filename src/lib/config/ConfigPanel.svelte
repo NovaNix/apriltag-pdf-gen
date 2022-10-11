@@ -1,9 +1,9 @@
 <script>
-	import {config} from './stores.js';
-	import {tagData} from "./preview/Tag.svelte";
-	import InfoPanel from "./InfoPanel.svelte";
+	import {config} from '../stores.js';
+	import {tagData} from "../preview/Tag.svelte";
+	import InfoPanel from "../InfoPanel.svelte";
 
-	import {pageWidth, pageHeight} from "./preview/Page.svelte";
+	import {pageWidth, pageHeight} from "../preview/Page.svelte";
 
 	let maxTagSize = calculateMaxTagSize();
 
@@ -50,7 +50,7 @@
 
 </script>
 
-<aside id="generator-config">
+<section id="generator-config">
 	<h1>Config</h1>
 
 	<label for="type-selector">Type</label>
@@ -64,6 +64,12 @@
 		<option value="tagStandard41h12" selected>tagStandard41h12</option>
 		<option value="tagStandard52h13">tagStandard52h13</option>
 	</select>
+
+	<div>
+		<input type="checkbox" id="debug-toggle" name="debug-toggle" bind:checked={$config.debug}>
+  		<label for="debug-toggle">Debug Mode</label>
+	</div>
+
 
 	<details>
 		<summary>Tag Stats</summary>
@@ -81,20 +87,6 @@
 	<input type="range" id="size-selector-slider" name="size" min="10" max={maxTagSize} step="0.1" bind:value={$config.tagDimensions}>
 
 	<div>
-		<label for="margin-selector">Page Margin (mm)</label>
-		<input type="number" id="margin-selector" name="margin" min="0" max="30" bind:value={$config.pageMargins}>
-	</div>
-
-	<div>
-		<label for="printer-margin-selector">Printer Margin X (mm)</label>
-		<input type="number" id="printer-margin-selector" name="printer-margin" min="0" step="1" bind:value={$config.printerMarginX}>
-	</div>
-	<div>
-		<label for="printer-margin-selector">Printer Margin Y (mm)</label>
-		<input type="number" id="printer-margin-selector" name="printer-margin" min="0" step="1" bind:value={$config.printerMarginY}>
-	</div>
-
-	<div>
 		<label for="tag-index-selector">Starting Index</label>
 		<input type="number" id="tag-index-selector" name="tag-index-selector" min="0" max={tagData[$config.tagType].count - 1}  bind:value={$config.startingIndex}>
 	</div>
@@ -104,8 +96,29 @@
 		<input type="number" id="tag-count-selector" name="tag-count-selector" min="1" max={tagData[$config.tagType].count - $config.startingIndex} bind:value={$config.tagCount}>
 	</div>
 
+	<div>
+		<label for="margin-selector">Page Margin (mm)</label>
+		<input type="number" id="margin-selector" name="margin" min="0" max="30" bind:value={$config.pageMargins}>
+	</div>
+
 	<fieldset>
-		<legend>Tag Labels</legend>
+		<legend>Printer Margin (mm)</legend>
+		
+		<div>
+			<label for="printer-margin-selector">x:</label>
+			<input type="number" id="printer-margin-selector" name="printer-margin" min="0" step="1" bind:value={$config.printerMarginX}>mm
+		</div>
+		<div>
+			<label for="printer-margin-selector">y:</label>
+			<input type="number" id="printer-margin-selector" name="printer-margin" min="0" step="1" bind:value={$config.printerMarginY}>mm
+		</div>
+	</fieldset>
+
+	<fieldset disabled={!$config.dataToggles.enabled}>
+		<legend>
+			<input type="checkbox" id="labels-toggle" name="lables-toggle" bind:checked={$config.dataToggles.enabled}>
+			<label for="index-toggle">Tag Labels</label>
+		</legend>
 	
 		<div>
 		  <input type="checkbox" id="type-toggle" name="type" bind:checked={$config.dataToggles.type}>
@@ -127,25 +140,19 @@
 
 	<InfoPanel/>
 
-</aside>
+</section>
 
 <style>
 	#generator-config {
 	    padding: 1em;
 
-	    background-color: white;
-	    border-color: gray;
-	    border-style: solid;
-	    border-width: 1px;
+	    
 
 	    display: flex;
 	    flex-direction: column;
 	    align-items: flex-start;
 
-	    flex-grow: 1;
-
-	    width: min-content;
-	    height: 100%;
+	    width: 100%;
 
 		overflow-y: auto;
 	}

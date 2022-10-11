@@ -12,10 +12,13 @@ const defaultConfig = {
 		tagCount: 1,
 
 		dataToggles: {
+			enabled: true,
 			type: true,
 			number: true,
 			dimensions: true
-		}
+		},
+
+		debug: false
 }
 
 let savedConfig = JSON.parse(localStorage.getItem("apriltag-pdf-generator-config"));
@@ -49,11 +52,22 @@ function setCSSVariable(name, value) {
 };
 
 export const previewScale = writable(1);
-previewScale.subscribe(value => {
-	setCSSVariable("--sim-scale", value);
+
+export const previewInfo = writable({
+	scale: 1,
+	pages: 1,
+	tagsPerX: 0,
+	tagsPerY: 0,
+	tagsPerPage: 0
+});
+previewInfo.subscribe(value => {
+	setCSSVariable("--sim-scale", value.scale);
 });
 
 export const previewWidth = writable(1);
 previewWidth.subscribe(value => {
-	previewScale.set(value / (8.5 * 96));
+	previewInfo.update(info => {
+		info.scale=(value / (8.5 * 96));
+		return info;
+	});
 });

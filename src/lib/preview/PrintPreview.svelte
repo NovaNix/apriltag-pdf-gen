@@ -1,7 +1,6 @@
 <script>
-	import {config, previewWidth} from '../stores.js';
+	import {config, previewInfo, previewWidth} from '../stores.js';
 	import Page from './Page.svelte';
-	import PreviewInfo from './PreviewInfo.svelte';
 
 	import {pageWidth, pageHeight} from "./Page.svelte";
 
@@ -70,7 +69,12 @@
 
 			pageData.push(page);
 		}
-		
+
+		// Update the preview info to have it show up in the print info panel
+		$previewInfo.tagsPerX = tagsPerX;
+		$previewInfo.tagsPerY = tagsPerY;
+		$previewInfo.tagsPerPage = tagsPerPage;
+		$previewInfo.pages = pageData.length;
 	}
 
 	config.subscribe(()=> {
@@ -85,7 +89,6 @@
 		<Page {...page}/>
 		{/each}
 	</section>
-	<PreviewInfo/>
 </main>
 
 <style>

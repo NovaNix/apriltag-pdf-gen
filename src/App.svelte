@@ -1,7 +1,7 @@
 <script>
     import PrintPreview from './lib/preview/PrintPreview.svelte';
-    import ConfigPanel from './lib/ConfigPanel.svelte';
+    import SidePanel from './lib/SidePanel.svelte';
 </script>
 
 <PrintPreview/>
-<ConfigPanel/>
+<SidePanel/>
