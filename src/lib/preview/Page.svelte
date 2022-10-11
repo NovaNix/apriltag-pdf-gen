@@ -56,7 +56,9 @@
 		.page-content {
 			box-sizing: border-box;
 			
-			box-shadow: 0 0 0 min(var(--padding-stripe-size), var(--page-margin)) var(--padding-visual-red);
+			
+
+			box-shadow: 0 0 0 min(var(--padding-stripe-size), var(--page-margin-x)) var(--padding-visual-red);
 			
 		}
 	}
@@ -109,7 +111,11 @@
 			background-color: blue;
 			break-after: always;
 			padding: var(--page-margin-y) var(--page-margin-x);
-			box-shadow: inset 0 0 0 1mm black;
+			
+			border-top: calc(1mm * var(--y-scale)) solid black;
+			border-bottom: calc(1mm * var(--y-scale)) solid black;
+			border-left: calc(1mm * var(--x-scale)) solid black;
+			border-right: calc(1mm * var(--x-scale)) solid black;
 		}
 	}
 </style>
