@@ -104,6 +104,7 @@
 		
 		#pages {
 			max-width: 8.5in;
+			margin: 0 auto;
 		}
 	}
 
