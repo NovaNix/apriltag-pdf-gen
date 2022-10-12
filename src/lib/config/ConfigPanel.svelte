@@ -2,8 +2,11 @@
 	import {config} from '../stores.js';
 	import {tagData} from "../preview/Tag.svelte";
 	import InfoPanel from "../InfoPanel.svelte";
+	import TypeSelector from "./TypeSelector.svelte";
+	import TagRangeSelector from './TagRangeSelector.svelte';
 
 	import {pageWidth, pageHeight} from "../preview/Page.svelte";
+    import SliderNumberInput from './SliderNumberInput.svelte';
 
 	let maxTagSize = calculateMaxTagSize();
 
@@ -50,51 +53,18 @@
 
 </script>
 
-<section id="generator-config">
-	<h1>Config</h1>
+<details id="generator-config" open>
+	<summary>Config</summary>
 
-	<label for="type-selector">Type</label>
-	<select name="type" id="type-selector" bind:value={$config.tagType}>
-		<option value="tag16h5">tag16h5</option>
-		<option value="tag25h9">tag25h9</option>
-		<option value="tag36h11">tag36h11</option>
-		<option value="tagCircle21h7">tagCircle21h7</option>
-		<option value="tagCircle49h12">tagCircle49h12</option>
-		<option value="tagCustom48h12">tagCustom48h12</option>
-		<option value="tagStandard41h12" selected>tagStandard41h12</option>
-		<option value="tagStandard52h13">tagStandard52h13</option>
-	</select>
+	<TypeSelector/>
 
 	<div>
 		<input type="checkbox" id="debug-toggle" name="debug-toggle" bind:checked={$config.debug}>
   		<label for="debug-toggle">Debug Mode</label>
 	</div>
 
-
-	<details>
-		<summary>Tag Stats</summary>
-		<div>
-			<p>Max tags: {tagData[$config.tagType].count}</p>
-			<p>Dimensions: {tagData[$config.tagType].bitwidth}px x {tagData[$config.tagType].bitwidth}px</p>
-		</div>
-	</details>	  
-
-	
-	
-	<label for="size-selector">Size (mm)</label>
-	<!-- A text input next to a slider to pick the width of the tag -->
-	<input type="number" id="size-selector" name="size" min="10" max={maxTagSize} step="0.1" bind:value={$config.tagDimensions}>
-	<input type="range" id="size-selector-slider" name="size" min="10" max={maxTagSize} step="0.1" bind:value={$config.tagDimensions}>
-
-	<div>
-		<label for="tag-index-selector">Starting Index</label>
-		<input type="number" id="tag-index-selector" name="tag-index-selector" min="0" max={tagData[$config.tagType].count - 1}  bind:value={$config.startingIndex}>
-	</div>
-
-	<div>
-		<label for="tag-count-selector">Tag Count</label>
-		<input type="number" id="tag-count-selector" name="tag-count-selector" min="1" max={tagData[$config.tagType].count - $config.startingIndex} bind:value={$config.tagCount}>
-	</div>
+	<SliderNumberInput name="size" min="10" max={maxTagSize} step="0.1" bind:value={$config.tagDimensions}>Size (mm)</SliderNumberInput>
+	<TagRangeSelector/>
 
 	<div>
 		<label for="margin-selector">Page Margin (mm)</label>
@@ -142,7 +112,7 @@
 
 	<InfoPanel/>
 
-</section>
+</details>
 
 <style>
 	#generator-config {
@@ -154,7 +124,28 @@
 		overflow-y: auto;
 	}
 
-	h1 {
-		text-align: center;
+	input[type="number"] {
+		width: 4em;
+	}
+
+	details {
+	    border: 1px solid #aaa;
+	    border-radius: 4px;
+	    padding: .5em .5em 0;
+	}
+
+	summary {
+	    font-weight: bold;
+	    margin: -.5em -.5em 0;
+	    padding: .5em;
+	}
+
+	details[open] {
+	    padding: .5em;
+	}
+
+	details[open] summary {
+	    border-bottom: 1px solid #aaa;
+    	margin-bottom: .5em;
 	}
 </style>

@@ -17,7 +17,9 @@
 
 		flex-grow: 1;
 
-	    min-width: 15%;
+	    width: 20%;
 	    height: 100%;
+
+		overflow-y: auto;
 	}
 </style>
