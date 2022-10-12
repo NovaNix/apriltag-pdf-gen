@@ -4,11 +4,13 @@
 </script>
 
 <aside id="side-panel">
+	<h1>Apriltags PDF Generator</h1>
 	<ConfigPanel/>
 	<PrintInfoPanel/>
 </aside>
 
 <style>
+
 	#side-panel {
 		background-color: white;
 	    border-color: gray;
@@ -21,5 +23,9 @@
 	    height: 100%;
 
 		overflow-y: auto;
+	}
+
+	h1 {
+		text-align: center;
 	}
 </style>
