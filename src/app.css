@@ -6,8 +6,8 @@
 	--printer-margin-x: 0mm;
 	--printer-margin-y: 0mm;
 
-	--x-scale: 1;
-	--y-scale: 1;
+	--x-scale: 0;
+	--y-scale: 0;
 
 	--page-aspect-ratio: 8.5/11;
 	--sim-scale: 1;

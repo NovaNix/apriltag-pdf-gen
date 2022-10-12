@@ -39,8 +39,8 @@ config.subscribe(value => {
 	let contentAreaWidth = pageWidth - (2 * value.printerMarginX);
 	let contentAreaHeight = pageHeight - (2 * value.printerMarginY);
 
-	setCSSVariable('--scale-x', (pageWidth / contentAreaWidth));
-	setCSSVariable('--scale-y', (pageHeight / contentAreaHeight));
+	setCSSVariable('--x-scale', (pageWidth / contentAreaWidth));
+	setCSSVariable('--y-scale', (pageHeight / contentAreaHeight));
 
 	// Save the config
 	localStorage.setItem("apriltag-pdf-generator-config", JSON.stringify(value));
