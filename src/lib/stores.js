@@ -1,6 +1,37 @@
 import { writable } from 'svelte/store';
 import {pageWidth, pageHeight} from "./preview/Page.svelte";
 
+class Config
+{
+	tagType= "tagStandard41h12";
+	
+	tagDimensions= 100;
+	
+	pageMargins= 25;
+	
+	printerMarginX= 0;
+	printerMarginY= 0;
+	
+	startingIndex= 0;
+	tagCount= 1;
+	
+	includePageBorder= true;
+	
+	dataToggles= {
+		enabled: true,
+		type: true,
+		number: true,
+		dimensions: true,
+		custom: false
+	};
+	customTagLabel= "";
+	
+	colorStripEnabled= false;
+	colorStripColor= "#ff0000";
+	
+	debug= false;
+}
+
 const defaultConfig = {
 	tagType: "tagStandard41h12",
 		tagDimensions: 100,
@@ -29,14 +60,20 @@ const defaultConfig = {
 		debug: false
 }
 
-let savedConfig = JSON.parse(localStorage.getItem("apriltag-pdf-generator-config"));
-
-if (savedConfig == null)
+function loadConfig()
 {
-	savedConfig = {...defaultConfig};
+	let savedConfig = JSON.parse(localStorage.getItem("apriltag-pdf-generator-config"));
+	if (savedConfig == null)
+	{
+		savedConfig = {};
+	}
+
+	let defaultConfig = new Config();
+
+	return Object.assign(defaultConfig, savedConfig);
 }
 
-export const config = writable(savedConfig);
+export const config = writable(loadConfig());
 
 config.subscribe(value => {
 	setCSSVariable('--true-tag-size', value.tagDimensions + "mm");
@@ -76,7 +113,7 @@ export const previewInfo = writable({
 	tagSize: 0,
 	contentWidth: 0,
 	contentHeight: 0,
-	
+
 });
 
 previewInfo.subscribe(value => {
