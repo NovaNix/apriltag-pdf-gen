@@ -40,10 +40,24 @@ function loadConfig()
 		savedConfig = {};
 	}
 
-	let defaultConfig = new Config();
-
 	return Object.assign(new Config(), savedConfig);
 }
+
+export const previewInfo = writable({
+	scale: 1,
+	pages: 1,
+	tagsPerX: 0,
+	tagsPerY: 0,
+	tagsPerPage: 0,
+
+	// Debug Info
+	tagSize: 0,
+	contentWidth: 0,
+	contentHeight: 0,
+	scaleX: 0,
+	scaleY: 0,
+
+});
 
 export const config = writable(loadConfig());
 
@@ -63,6 +77,12 @@ config.subscribe(value => {
 	setCSSVariable('--x-scale', (pageWidth / contentAreaWidth));
 	setCSSVariable('--y-scale', (pageHeight / contentAreaHeight));
 
+	previewInfo.update(info => {
+		info.scaleX = (pageWidth / contentAreaWidth);
+		info.scaleY = (pageHeight / contentAreaHeight);
+		return info;
+	});
+
 	// Save the config
 	localStorage.setItem("apriltag-pdf-generator-config", JSON.stringify(value));
 	console.log("Saving config");
@@ -73,20 +93,6 @@ function setCSSVariable(name, value) {
 };
 
 export const previewScale = writable(1);
-
-export const previewInfo = writable({
-	scale: 1,
-	pages: 1,
-	tagsPerX: 0,
-	tagsPerY: 0,
-	tagsPerPage: 0,
-
-	// Debug Info
-	tagSize: 0,
-	contentWidth: 0,
-	contentHeight: 0,
-
-});
 
 previewInfo.subscribe(value => {
 	setCSSVariable("--sim-scale", value.scale);
@@ -99,3 +105,8 @@ previewWidth.subscribe(value => {
 		return info;
 	});
 });
+
+export function resetConfig()
+{
+	config.set(new Config());
+}

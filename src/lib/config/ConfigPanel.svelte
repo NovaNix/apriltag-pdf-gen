@@ -1,5 +1,5 @@
 <script>
-	import {config} from '../stores.js';
+	import {config, resetConfig} from '../stores.js';
 	import {tagData} from "../preview/Tag.svelte";
 	import TypeSelector from "./TypeSelector.svelte";
 	import TagRangeSelector from './TagRangeSelector.svelte';
@@ -54,6 +54,15 @@
 	function printPage()
 	{
 		window.print();
+	}
+
+	// Asks the user if they want to reset the config, and resets it if they confirm
+	function reset()
+	{
+		if (confirm("Do you really want to reset the configuration?")) 
+		{
+  			resetConfig();
+		}
 	}
 
 </script>
@@ -133,6 +142,7 @@
 	</div>
 
 	<button id="print-button" on:click={printPage}>Print</button>
+	<button id="reset-button" on:click={reset}>Reset</button>
 
 </details>
 
