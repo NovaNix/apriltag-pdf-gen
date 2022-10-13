@@ -56,14 +56,9 @@
 		.page-content {
 			box-sizing: border-box;
 			
-			
-
 			box-shadow: 0 0 0 min(var(--padding-stripe-size), var(--page-margin-x)) var(--padding-visual);
-			
 		}
 	}
-
-	
 
 	.page-content {
 		background: white;
@@ -78,22 +73,13 @@
 
 	    width: 100%;
 		height: 100%;
-
-		
 	}
 
 	.printable-area {
-		/* border-color: black;
-		border-width: calc(1mm * var(--sim-scale));
-		border-style: solid; */
-
-		/* box-shadow: inset 0 0 0 calc(1mm * var(--sim-scale)) black; */
-
 		width: 100%;
 		height: 100%;
 		border: calc(var(--page-border) * var(--sim-scale)) solid black;
 		
-
 		box-sizing: border-box;
 	}
 
