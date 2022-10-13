@@ -19,7 +19,7 @@
     }
 
     p {
-        line-height: 2em;
+        line-height: calc(2em - 2px); /* Line height needs to be adjusted to account for the borders on the parent */
         font-size: 1em;
         text-align: center;
         padding: 0;
