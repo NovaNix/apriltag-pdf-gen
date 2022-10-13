@@ -24,8 +24,8 @@
 	--color-strip-color: red;
 	--color-strip-width: calc(var(--tag-padding-x) / 3);
 
-	--padding-visual-red: #ed8e8e;
-	--padding-visual-light-red: white;
+	--printer-margin-color: red;
+	--padding-visual: orange;
 	--padding-stripe-size: 5px;
 }
 

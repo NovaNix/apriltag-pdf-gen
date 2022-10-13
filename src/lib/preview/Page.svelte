@@ -27,7 +27,7 @@
 <style>
 	@media screen {
 		.page {
-			background-color: var(--padding-visual-red);
+			background-color: var(--printer-margin-color);
 			margin: 0;
 			margin-left: auto;
 			margin-right: auto;
@@ -44,10 +44,10 @@
 			/* Apply a red stripe to the page background */
 			background: repeating-linear-gradient(
   				45deg,
-  				var(--padding-visual-red),
-  				var(--padding-visual-red) var(--padding-stripe-size),
-  				var(--padding-visual-light-red) var(--padding-stripe-size),
-  				var(--padding-visual-light-red) calc(var(--padding-stripe-size) * 2)
+  				var(--padding-visual),
+  				var(--padding-visual) var(--padding-stripe-size),
+  				white var(--padding-stripe-size),
+  				white calc(var(--padding-stripe-size) * 2)
 			);
 
 			padding: var(--page-margin-y) var(--page-margin-x);
@@ -58,7 +58,7 @@
 			
 			
 
-			box-shadow: 0 0 0 min(var(--padding-stripe-size), var(--page-margin-x)) var(--padding-visual-red);
+			box-shadow: 0 0 0 min(var(--padding-stripe-size), var(--page-margin-x)) var(--padding-visual);
 			
 		}
 	}
