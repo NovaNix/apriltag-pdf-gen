@@ -12,6 +12,8 @@
 		<p>Tag Size: {$previewInfo.tagSize}mm</p>
 		<p>Content Width: {$previewInfo.contentWidth}mm</p>
 		<p>Content Height: {$previewInfo.contentHeight}mm</p>
+		<p>Scale X: {$previewInfo.scaleX}</p>
+		<p>Scale Y: {$previewInfo.scaleY}</p>
 	{/if}
 </details>
 
