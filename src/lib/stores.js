@@ -32,34 +32,6 @@ class Config
 	debug= false;
 }
 
-const defaultConfig = {
-	tagType: "tagStandard41h12",
-		tagDimensions: 100,
-		pageMargins: 25,
-		printerMarginX: 0,
-		printerMarginY: 0,
-
-		startingIndex: 0,
-		tagCount: 1,
-
-		includePageBorder: true,
-
-		dataToggles: {
-			enabled: true,
-			type: true,
-			number: true,
-			dimensions: true,
-			custom: false
-		},
-
-		customTagLabel: "",
-
-		colorStripEnabled: false,
-		colorStripColor: "#ff0000",
-
-		debug: false
-}
-
 function loadConfig()
 {
 	let savedConfig = JSON.parse(localStorage.getItem("apriltag-pdf-generator-config"));
@@ -70,7 +42,7 @@ function loadConfig()
 
 	let defaultConfig = new Config();
 
-	return Object.assign(defaultConfig, savedConfig);
+	return Object.assign(new Config(), savedConfig);
 }
 
 export const config = writable(loadConfig());
