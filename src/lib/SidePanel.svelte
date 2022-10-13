@@ -1,6 +1,7 @@
 <script>
 	import ConfigPanel from "./config/ConfigPanel.svelte";
 	import DistanceEstimationPanel from "./DistanceEstimationPanel.svelte";
+    import PreviewInfo from "./preview/PreviewInfo.svelte";
     import PrintInfoPanel from "./PrintInfoPanel.svelte";
 </script>
 
@@ -9,6 +10,7 @@
 	<ConfigPanel/>
 	<DistanceEstimationPanel/>
 	<PrintInfoPanel/>
+	<PreviewInfo/>
 </aside>
 
 <style>
