@@ -3,6 +3,7 @@
 	import {tagData} from "../preview/Tag.svelte";
 	import TypeSelector from "./TypeSelector.svelte";
 	import TagRangeSelector from './TagRangeSelector.svelte';
+	import Toggle from './Toggle.svelte';
 
 	import {pageWidth, pageHeight} from "../preview/Page.svelte";
     import SliderNumberInput from './SliderNumberInput.svelte';
@@ -72,10 +73,7 @@
 
 	<TypeSelector/>
 
-	<div>
-		<input type="checkbox" id="debug-toggle" name="debug-toggle" bind:checked={$config.debug}>
-  		<label for="debug-toggle">Debug Mode</label>
-	</div>
+	<Toggle name="debug-toggle" bind:checked={$config.debug}>Debug Mode</Toggle>
 
 	<SliderNumberInput name="size" min="10" max={maxTagSize} step="0.1" bind:value={$config.tagDimensions}>Size (mm)</SliderNumberInput>
 	<TagRangeSelector/>
@@ -85,10 +83,7 @@
 		<input type="number" id="margin-selector" name="margin" min="0" max="30" bind:value={$config.pageMargins}>
 	</div>
 
-	<legend>
-		<input type="checkbox" id="page-border-toggle" name="page-border-toggle" bind:checked={$config.includePageBorder}>
-		<label for="page-border-toggle">Page Border</label>
-	</legend>
+	<Toggle name="page-border-toggle" bind:checked={$config.includePageBorder}>Page Border</Toggle>
 
 	<fieldset>
 		<legend>Printer Margin (mm)</legend>
@@ -105,28 +100,15 @@
 
 	<fieldset disabled={!$config.dataToggles.enabled}>
 		<legend>
-			<input type="checkbox" id="labels-toggle" name="lables-toggle" bind:checked={$config.dataToggles.enabled}>
-			<label for="index-toggle">Tag Labels</label>
+			<Toggle name="labels-toggle" bind:checked={$config.dataToggles.enabled}>Tag Labels</Toggle>
 		</legend>
-	
-		<div>
-		  <input type="checkbox" id="type-toggle" name="type" bind:checked={$config.dataToggles.type}>
-		  <label for="type-toggle">Type</label>
-		</div>
-	
-		<div>
-			<input type="checkbox" id="index-toggle" name="index" bind:checked={$config.dataToggles.number}>
-			<label for="index-toggle">Index</label>
-		</div>
+
+		<Toggle name="type-label-toggle" bind:checked={$config.dataToggles.type}>Type</Toggle>
+		<Toggle name="index-label-toggle" bind:checked={$config.dataToggles.number}>Index</Toggle>
+		<Toggle name="dimensions-label-toggle" bind:checked={$config.dataToggles.dimensions}>Dimensions</Toggle>
 
 		<div>
-			<input type="checkbox" id="dimensions-toggle" name="dimensions" bind:checked={$config.dataToggles.dimensions}>
-			<label for="dimensions-toggle">Dimensions</label>
-		</div>
-
-		<div>
-			<input type="checkbox" id="custom-label-toggle" name="custom-label" bind:checked={$config.dataToggles.custom}>
-			<label for="custom-label-toggle">Custom</label>
+			<Toggle name="custom-label-toggle" bind:checked={$config.dataToggles.custom}>Custom</Toggle>
 			{#if $config.dataToggles.custom}
 				<input type="text" id="custom-label-input" name="custom-label-input" bind:value={$config.customTagLabel}>
 			{/if}
@@ -134,14 +116,13 @@
 	</fieldset>
 	
 	<div>
-		<input type="checkbox" id="color-strip-toggle" name="color-strip-toggle" bind:checked={$config.colorStripEnabled}>
-		<label for="color-strip-toggle">Color Strip</label>
+		<Toggle name="color-strip-toggle" bind:checked={$config.colorStripEnabled}>Color Strip</Toggle>
 		{#if $config.colorStripEnabled}
 		<input type="color" id="color-strip-color-input" name="color-strip-color-input" bind:value={$config.colorStripColor}>
 		{/if}
 	</div>
 
-	<button id="print-button" on:click={printPage}>Print</button>
+	<button id="print-button" on:click={printPage}><span class="material-symbols-outlined">print</span>Print</button>
 	<button id="reset-button" on:click={reset}>Reset</button>
 
 </details>
@@ -181,4 +162,6 @@
 	    border-bottom: 1px solid #aaa;
     	margin-bottom: .5em;
 	}
+
+	
 </style>
