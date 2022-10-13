@@ -118,27 +118,19 @@
 		<div>
 			<input type="checkbox" id="custom-label-toggle" name="custom-label" bind:checked={$config.dataToggles.custom}>
 			<label for="custom-label-toggle">Custom</label>
+			{#if $config.dataToggles.custom}
+				<input type="text" id="custom-label-input" name="custom-label-input" bind:value={$config.customTagLabel}>
+			{/if}
 		</div>
 	</fieldset>
-
-	{#if $config.dataToggles.custom}
-	<div>
-		<label for="custom-label-input">Custom Label Text: </label>
-		<input type="text" id="custom-label-input" name="custom-label-input" bind:value={$config.customTagLabel}>
-	</div>
-	{/if}
 	
 	<div>
 		<input type="checkbox" id="color-strip-toggle" name="color-strip-toggle" bind:checked={$config.colorStripEnabled}>
 		<label for="color-strip-toggle">Color Strip</label>
+		{#if $config.colorStripEnabled}
+		<input type="color" id="color-strip-color-input" name="color-strip-color-input" bind:value={$config.colorStripColor}>
+		{/if}
 	</div>
-
-	{#if $config.colorStripEnabled}
-		<div>
-			<label for="color-strip-color-input">Color Strip Color: </label>
-			<input type="color" id="color-strip-color-input" name="color-strip-color-input" bind:value={$config.colorStripColor}>
-		</div>
-	{/if}
 
 	<button id="print-button" on:click={printPage}>Print</button>
 
