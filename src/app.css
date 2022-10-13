@@ -21,6 +21,9 @@
 	--page-margin-x: calc(var(--true-page-margin) * var(--sim-scale));
 	--page-margin-y: calc(var(--true-page-margin) * var(--sim-scale));
 
+	--color-strip-color: red;
+	--color-strip-width: calc(var(--tag-padding-x) / 3);
+
 	--padding-visual-red: #ed8e8e;
 	--padding-visual-light-red: white;
 	--padding-stripe-size: 5px;
@@ -42,14 +45,12 @@ html, body {
 		background-color: Gainsboro;
 	}
 
-	.tag-img {
-		border-color:pink;
-		border-style: solid;
-		border-width: 1px;
+	.tag-img:hover {
+		box-shadow: 0 0 0 1px pink;
 	}
 }
 
-/* The styling for the print and screen */
+/* The styling for the print */
 @media print {
 	
 	:root {

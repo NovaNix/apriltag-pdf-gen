@@ -72,6 +72,10 @@
 
 <section class="tag-section">
 	<img class="tag-img" src="{source}" alt="tag {index}">
+	{#if $config.colorStripEnabled}
+		<div class="color-strip color-strip-l"></div>
+		<div class="color-strip color-strip-r"></div>
+	{/if}
 	{#if $config.dataToggles.enabled}
 		{#if $config.dataToggles.type}<p class="tag-info tag-type">{tagData[$config.tagType].name}</p>{/if}
 		{#if $config.dataToggles.number}<p class="tag-info tag-index"> {index}</p>{/if}
@@ -150,6 +154,29 @@
 		top: 0;
 		left: 50%;
 		transform: translateX(-50%);
+	}
+
+	.color-strip {
+		position: absolute;
+		top: 50%;
+		
+		background-color: var(--color-strip-color);
+
+		width: var(--color-strip-width);
+		height: var(--tag-size-y);
+
+		border-radius: calc(var(--color-strip-width) / 2);
+
+	}
+
+	.color-strip-l {
+		left: calc(var(--tag-padding-x) / 2);
+		transform: translate(-50%, -50%);
+	}
+
+	.color-strip-r {
+		right: calc(var(--tag-padding-x) / 2);
+		transform: translate(50%, -50%);
 	}
 
 </style>

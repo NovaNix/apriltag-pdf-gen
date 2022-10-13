@@ -106,11 +106,8 @@
 
 	@media print {
 		.page {
-			/*width: calc(8.5in - var(--printer-margin-x));
-			height: calc(11in - var(--printer-margin-y));*/
 			width: 8.5in;
 			height: 11in;
-			background-color: blue;
 			break-after: always;
 			padding: var(--page-margin-y) var(--page-margin-x);
 			

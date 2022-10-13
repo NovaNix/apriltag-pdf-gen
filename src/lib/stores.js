@@ -23,6 +23,9 @@ const defaultConfig = {
 
 		customTagLabel: "",
 
+		colorStripEnabled: false,
+		colorStripColor: "#ff0000",
+
 		debug: false
 }
 
@@ -42,6 +45,8 @@ config.subscribe(value => {
 	setCSSVariable('--printer-margin-y', value.printerMarginY + 'mm');
 
 	setCSSVariable('--page-border', (value.includePageBorder ? "1mm" : "0"));
+
+	setCSSVariable('--color-strip-color', value.colorStripColor);
 
 	let contentAreaWidth = pageWidth - (2 * value.printerMarginX);
 	let contentAreaHeight = pageHeight - (2 * value.printerMarginY);

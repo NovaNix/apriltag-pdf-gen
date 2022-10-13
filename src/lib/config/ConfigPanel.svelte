@@ -127,7 +127,18 @@
 		<input type="text" id="custom-label-input" name="custom-label-input" bind:value={$config.customTagLabel}>
 	</div>
 	{/if}
-	<!-- TODO: Add a toggle for the black page border used for dimensional accuracy testing -->
+	
+	<div>
+		<input type="checkbox" id="color-strip-toggle" name="color-strip-toggle" bind:checked={$config.colorStripEnabled}>
+		<label for="color-strip-toggle">Color Strip</label>
+	</div>
+
+	{#if $config.colorStripEnabled}
+		<div>
+			<label for="color-strip-color-input">Color Strip Color: </label>
+			<input type="color" id="color-strip-color-input" name="color-strip-color-input" bind:value={$config.colorStripColor}>
+		</div>
+	{/if}
 
 	<button id="print-button" on:click={printPage}>Print</button>
 
