@@ -7,6 +7,7 @@
 
 	import {pageWidth, pageHeight} from "../preview/Page.svelte";
     import SliderNumberInput from './SliderNumberInput.svelte';
+    import LengthInput from './LengthInput.svelte';
 
 	let maxTagSize = calculateMaxTagSize();
 
@@ -89,8 +90,7 @@
 		<legend>Printer Margin (mm)</legend>
 		
 		<div>
-			<label for="printer-margin-selector">x:</label>
-			<input type="number" id="printer-margin-selector" name="printer-margin" min="0" step="1" bind:value={$config.printerMarginX}> mm
+			<LengthInput name="printer-margin-x-selector" step="1" max=20 bind:value={$config.printerMarginX}>x:</LengthInput>
 		</div>
 		<div>
 			<label for="printer-margin-selector">y:</label>
@@ -107,23 +107,24 @@
 		<Toggle name="index-label-toggle" bind:checked={$config.dataToggles.number}>Index</Toggle>
 		<Toggle name="dimensions-label-toggle" bind:checked={$config.dataToggles.dimensions}>Dimensions</Toggle>
 
-		<div>
-			<Toggle name="custom-label-toggle" bind:checked={$config.dataToggles.custom}>Custom</Toggle>
+		<Toggle name="custom-label-toggle" bind:checked={$config.dataToggles.custom}>Custom
 			{#if $config.dataToggles.custom}
 				<input type="text" id="custom-label-input" name="custom-label-input" bind:value={$config.customTagLabel}>
 			{/if}
-		</div>
+		</Toggle>
 	</fieldset>
 	
-	<div>
-		<Toggle name="color-strip-toggle" bind:checked={$config.colorStripEnabled}>Color Strip</Toggle>
+	<Toggle name="color-strip-toggle" bind:checked={$config.colorStripEnabled}>Color Strip
 		{#if $config.colorStripEnabled}
-		<input type="color" id="color-strip-color-input" name="color-strip-color-input" bind:value={$config.colorStripColor}>
+			<input type="color" id="color-strip-color-input" name="color-strip-color-input" bind:value={$config.colorStripColor}>
 		{/if}
-	</div>
+	</Toggle>
 
-	<button id="print-button" on:click={printPage}><span class="material-symbols-outlined">print</span>Print</button>
-	<button id="reset-button" on:click={reset}>Reset</button>
+	<div>
+		<button id="print-button" on:click={printPage}><span class="material-symbols-outlined">print</span>Print</button>
+		<button id="reset-button" on:click={reset}>Reset</button>
+	</div>
+	
 
 </details>
 
@@ -161,6 +162,22 @@
 	details[open] summary {
 	    border-bottom: 1px solid #aaa;
     	margin-bottom: .5em;
+	}
+
+	button {
+		border: 1.5px solid black;
+	}
+
+	#print-button {
+		background-color: lightgreen;
+	}
+
+	#print-button span {
+		height: 100%;
+	}
+
+	#reset-button {
+		background-color: salmon;
 	}
 
 	

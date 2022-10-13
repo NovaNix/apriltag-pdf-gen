@@ -35,6 +35,8 @@ class Config
 function loadConfig()
 {
 	let savedConfig = JSON.parse(localStorage.getItem("apriltag-pdf-generator-config"));
+	
+	savedConfig = null;
 	if (savedConfig == null)
 	{
 		savedConfig = {};
@@ -74,8 +76,8 @@ config.subscribe(value => {
 	let contentAreaWidth = pageWidth - (2 * value.printerMarginX);
 	let contentAreaHeight = pageHeight - (2 * value.printerMarginY);
 
-	setCSSVariable('--x-scale', (pageWidth / contentAreaWidth));
-	setCSSVariable('--y-scale', (pageHeight / contentAreaHeight));
+	setCSSVariable('--x-scale', Math.max(pageWidth / contentAreaWidth, 0));
+	setCSSVariable('--y-scale', Math.max(pageHeight / contentAreaHeight, 0));
 
 	previewInfo.update(info => {
 		info.scaleX = (pageWidth / contentAreaWidth);
