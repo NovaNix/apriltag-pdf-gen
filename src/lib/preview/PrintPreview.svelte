@@ -79,6 +79,10 @@
 		$previewInfo.tagsPerY = tagsPerY;
 		$previewInfo.tagsPerPage = tagsPerPage;
 		$previewInfo.pages = pageData.length;
+
+		$previewInfo.tagSize = tagBlockSize;
+		$previewInfo.contentWidth = usableWidth;
+		$previewInfo.contentHeight = usableHeight;
 	}
 
 	config.subscribe(()=> {

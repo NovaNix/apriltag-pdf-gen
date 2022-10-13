@@ -7,7 +7,12 @@
 	<p>{$previewInfo.pages} pages, {$config.tagCount} tags</p>
 	<p>Tags Per Page: {$previewInfo.tagsPerPage} </p>
 	<p>x: {$previewInfo.tagsPerX}, y: {$previewInfo.tagsPerY}</p>
-	<p id="preview-scale">Preview Scale: {Number($previewInfo.scale).toLocaleString(undefined,{style: 'percent', minimumFractionDigits:2})}</p>
+	{#if $config.debug}
+		<h2>Debug Info</h2>
+		<p>Tag Size: {$previewInfo.tagSize}mm</p>
+		<p>Content Width: {$previewInfo.contentWidth}mm</p>
+		<p>Content Height: {$previewInfo.contentHeight}mm</p>
+	{/if}
 </details>
 
 <style>

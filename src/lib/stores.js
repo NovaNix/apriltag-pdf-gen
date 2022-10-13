@@ -70,7 +70,13 @@ export const previewInfo = writable({
 	pages: 1,
 	tagsPerX: 0,
 	tagsPerY: 0,
-	tagsPerPage: 0
+	tagsPerPage: 0,
+
+	// Debug Info
+	tagSize: 0,
+	contentWidth: 0,
+	contentHeight: 0,
+	
 });
 
 previewInfo.subscribe(value => {
