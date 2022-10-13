@@ -76,6 +76,7 @@
 		{#if $config.dataToggles.type}<p class="tag-info tag-type">{tagData[$config.tagType].name}</p>{/if}
 		{#if $config.dataToggles.number}<p class="tag-info tag-index"> {index}</p>{/if}
 		{#if $config.dataToggles.dimensions}<p class="tag-info tag-dimensions">{$config.tagDimensions}mm</p>{/if}
+		{#if $config.dataToggles.custom}<p class="tag-info tag-custom-label">{$config.customTagLabel}</p>{/if}
 	{/if}
 	
 </section>
@@ -129,12 +130,12 @@
 		position: absolute;
 		left: var(--tag-padding-x);
 		bottom: 0;
-		
 	}
 
 	.tag-index {
 		position: absolute;
 		left: 50%;
+		transform: translateX(-50%);
 		bottom: 0;
 	}
 
@@ -142,6 +143,13 @@
 		position: absolute;
 		right: var(--tag-padding-x);
 		bottom: 0;
+	}
+
+	.tag-custom-label {
+		position: absolute;
+		top: 0;
+		left: 50%;
+		transform: translateX(-50%);
 	}
 
 </style>

@@ -12,9 +12,9 @@
 </script>
 
 
-<article class="page" >
+<article class="page">
 	
-	<div class="printable-area">
+	<div class="printable-area" >
 		<div class="page-content">
 			{#each Array(length) as _, i}
 				<Tag index={i + start}/>
@@ -87,10 +87,12 @@
 		border-width: calc(1mm * var(--sim-scale));
 		border-style: solid; */
 
-		box-shadow: inset 0 0 0 calc(1mm * var(--sim-scale)) black;
+		/* box-shadow: inset 0 0 0 calc(1mm * var(--sim-scale)) black; */
 
 		width: 100%;
 		height: 100%;
+		border: calc(var(--page-border) * var(--sim-scale)) solid black;
+		
 
 		box-sizing: border-box;
 	}
@@ -112,10 +114,10 @@
 			break-after: always;
 			padding: var(--page-margin-y) var(--page-margin-x);
 			
-			border-top: calc(1mm * var(--y-scale)) solid black;
-			border-bottom: calc(1mm * var(--y-scale)) solid black;
-			border-left: calc(1mm * var(--x-scale)) solid black;
-			border-right: calc(1mm * var(--x-scale)) solid black;
+			border-top: calc(var(--page-border) * var(--y-scale)) solid black;
+			border-bottom: calc(var(--page-border) * var(--y-scale)) solid black;
+			border-left: calc(var(--page-border) * var(--x-scale)) solid black;
+			border-right: calc(var(--page-border) * var(--x-scale)) solid black;
 		}
 	}
 </style>

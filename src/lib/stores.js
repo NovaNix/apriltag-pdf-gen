@@ -11,12 +11,17 @@ const defaultConfig = {
 		startingIndex: 0,
 		tagCount: 1,
 
+		includePageBorder: true,
+
 		dataToggles: {
 			enabled: true,
 			type: true,
 			number: true,
-			dimensions: true
+			dimensions: true,
+			custom: false
 		},
+
+		customTagLabel: "",
 
 		debug: false
 }
@@ -35,6 +40,8 @@ config.subscribe(value => {
 	setCSSVariable('--true-page-margin', value.pageMargins + 'mm');
 	setCSSVariable('--printer-margin-x', value.printerMarginX + 'mm');
 	setCSSVariable('--printer-margin-y', value.printerMarginY + 'mm');
+
+	setCSSVariable('--page-border', (value.includePageBorder ? "1mm" : "0"));
 
 	let contentAreaWidth = pageWidth - (2 * value.printerMarginX);
 	let contentAreaHeight = pageHeight - (2 * value.printerMarginY);
@@ -60,6 +67,7 @@ export const previewInfo = writable({
 	tagsPerY: 0,
 	tagsPerPage: 0
 });
+
 previewInfo.subscribe(value => {
 	setCSSVariable("--sim-scale", value.scale);
 });

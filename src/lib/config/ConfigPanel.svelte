@@ -1,7 +1,6 @@
 <script>
 	import {config} from '../stores.js';
 	import {tagData} from "../preview/Tag.svelte";
-	import InfoPanel from "../InfoPanel.svelte";
 	import TypeSelector from "./TypeSelector.svelte";
 	import TagRangeSelector from './TagRangeSelector.svelte';
 
@@ -14,6 +13,12 @@
 	{
 		let marginSizeX = ($config.pageMargins * 2) + ($config.printerMarginX * 2);
 		let marginSizeY = ($config.pageMargins * 2) + ($config.printerMarginY * 2);
+
+		if ($config.includePageBorder)
+		{
+			marginSizeX += 2;
+			marginSizeY += 2;
+		}
 
 		let usableWidth = (pageWidth - marginSizeX);
 		let usableHeight = (pageHeight - marginSizeY);
@@ -71,16 +76,21 @@
 		<input type="number" id="margin-selector" name="margin" min="0" max="30" bind:value={$config.pageMargins}>
 	</div>
 
+	<legend>
+		<input type="checkbox" id="page-border-toggle" name="page-border-toggle" bind:checked={$config.includePageBorder}>
+		<label for="page-border-toggle">Page Border</label>
+	</legend>
+
 	<fieldset>
 		<legend>Printer Margin (mm)</legend>
 		
 		<div>
 			<label for="printer-margin-selector">x:</label>
-			<input type="number" id="printer-margin-selector" name="printer-margin" min="0" step="1" bind:value={$config.printerMarginX}>mm
+			<input type="number" id="printer-margin-selector" name="printer-margin" min="0" step="1" bind:value={$config.printerMarginX}> mm
 		</div>
 		<div>
 			<label for="printer-margin-selector">y:</label>
-			<input type="number" id="printer-margin-selector" name="printer-margin" min="0" step="1" bind:value={$config.printerMarginY}>mm
+			<input type="number" id="printer-margin-selector" name="printer-margin" min="0" step="1" bind:value={$config.printerMarginY}> mm
 		</div>
 	</fieldset>
 
@@ -104,17 +114,27 @@
 			<input type="checkbox" id="dimensions-toggle" name="dimensions" bind:checked={$config.dataToggles.dimensions}>
 			<label for="dimensions-toggle">Dimensions</label>
 		</div>
+
+		<div>
+			<input type="checkbox" id="custom-label-toggle" name="custom-label" bind:checked={$config.dataToggles.custom}>
+			<label for="custom-label-toggle">Custom</label>
+		</div>
 	</fieldset>
 
+	{#if $config.dataToggles.custom}
+	<div>
+		<label for="custom-label-input">Custom Label Text: </label>
+		<input type="text" id="custom-label-input" name="custom-label-input" bind:value={$config.customTagLabel}>
+	</div>
+	{/if}
 	<!-- TODO: Add a toggle for the black page border used for dimensional accuracy testing -->
 
 	<button id="print-button" on:click={printPage}>Print</button>
 
-	<InfoPanel/>
-
 </details>
 
 <style>
+
 	#generator-config {
 	    padding: 1em;
 

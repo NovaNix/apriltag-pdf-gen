@@ -1,11 +1,13 @@
 <script>
 	import ConfigPanel from "./config/ConfigPanel.svelte";
+	import DistanceEstimationPanel from "./DistanceEstimationPanel.svelte";
     import PrintInfoPanel from "./PrintInfoPanel.svelte";
 </script>
 
 <aside id="side-panel">
 	<h1>Apriltags PDF Generator</h1>
 	<ConfigPanel/>
+	<DistanceEstimationPanel/>
 	<PrintInfoPanel/>
 </aside>
 

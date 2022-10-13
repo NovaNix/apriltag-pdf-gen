@@ -24,6 +24,10 @@
 
 <style>
 
+    fieldset {
+        width: min-content;
+    }
+
     #range-selectors {
         width: 100%;
         display: flex;

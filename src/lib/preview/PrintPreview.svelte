@@ -19,6 +19,12 @@
 		let marginSizeX = ($config.pageMargins * 2) + ($config.printerMarginX * 2);
 		let marginSizeY = ($config.pageMargins * 2) + ($config.printerMarginY * 2);
 		
+		if ($config.includePageBorder)
+		{
+			marginSizeX += 2;
+			marginSizeY += 2;
+		}
+
 		let usableWidth = (pageWidth - marginSizeX);
 		let usableHeight = (pageHeight - marginSizeY);
 
@@ -26,8 +32,6 @@
 
 		let tagsPerX = Math.floor(usableWidth / tagBlockSize);
 		let tagsPerY = Math.floor(usableHeight / tagBlockSize);
-
-		console.log(`Tags per page: ${tagsPerX} x ${tagsPerY}`);
 
 		let tagsPerPage = tagsPerX * tagsPerY;
 
