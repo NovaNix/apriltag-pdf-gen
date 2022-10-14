@@ -81,8 +81,6 @@
 
 	<LengthInput name="margin-selector" step="1" max=30 bind:value={$config.pageMargins}>Page Margin:</LengthInput>
 
-	<Toggle name="page-border-toggle" bind:checked={$config.includePageBorder}>Page Border</Toggle>
-
 	<fieldset>
 		<legend>Printer Margin</legend>
 		
@@ -111,6 +109,8 @@
 			<input type="color" id="color-strip-color-input" name="color-strip-color-input" bind:value={$config.colorStripColor}>
 		{/if}
 	</Toggle>
+
+	<Toggle name="page-border-toggle" bind:checked={$config.includePageBorder}>Page Border</Toggle>
 
 	<div>
 		<button id="print-button" on:click={printPage}><span class="material-symbols-outlined">print</span>Print</button>
@@ -170,6 +170,15 @@
 
 	#reset-button {
 		background-color: salmon;
+	}
+
+	input[type=color] {
+		height: 1em;
+		box-sizing: border-box;
+		display: inline-block;
+		padding: 0;
+		border: 0;
+		margin: 0;
 	}
 
 	
