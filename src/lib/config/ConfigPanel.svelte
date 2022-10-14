@@ -127,8 +127,6 @@
 <style>
 
 	#generator-config {
-	    padding: 1em;
-
 		box-sizing: border-box;
 	    width: 100%;
 
@@ -136,6 +134,7 @@
 	}
 
 	#generator-config div {
+		padding: 0.5em;
 		display: flex;
 		flex-direction: column;
 		align-items: stretch;
