@@ -70,51 +70,55 @@
 </script>
 
 <details id="generator-config" open>
-	<summary>Config</summary>
-
-	<TypeSelector/>
-
-	<Toggle name="debug-toggle" bind:checked={$config.debug}>Debug Mode</Toggle>
-
-	<SliderNumberInput name="size" min="10" max={maxTagSize} step="0.1" bind:value={$config.tagDimensions}>Size (mm)</SliderNumberInput>
-	<TagRangeSelector/>
-
-	<LengthInput name="margin-selector" step="1" max=30 bind:value={$config.pageMargins}>Page Margin:</LengthInput>
-
-	<fieldset>
-		<legend>Printer Margin</legend>
-		
-		<LengthInput name="printer-margin-x-selector" step="1" max=20 bind:value={$config.printerMarginX}>x:</LengthInput>
-		<LengthInput name="printer-margin-y-selector" step="1" max=20 bind:value={$config.printerMarginY}>y:</LengthInput>
-	</fieldset>
-
-	<fieldset disabled={!$config.dataToggles.enabled}>
-		<legend>
-			<Toggle name="labels-toggle" bind:checked={$config.dataToggles.enabled}>Tag Labels</Toggle>
-		</legend>
-
-		<Toggle name="type-label-toggle" bind:checked={$config.dataToggles.type}>Type</Toggle>
-		<Toggle name="index-label-toggle" bind:checked={$config.dataToggles.number}>Index</Toggle>
-		<Toggle name="dimensions-label-toggle" bind:checked={$config.dataToggles.dimensions}>Dimensions</Toggle>
-
-		<Toggle name="custom-label-toggle" bind:checked={$config.dataToggles.custom}>Custom
-			{#if $config.dataToggles.custom}
-				<input type="text" id="custom-label-input" name="custom-label-input" bind:value={$config.customTagLabel}>
-			{/if}
-		</Toggle>
-	</fieldset>
-	
-	<Toggle name="color-strip-toggle" bind:checked={$config.colorStripEnabled}>Color Strip
-		{#if $config.colorStripEnabled}
-			<input type="color" id="color-strip-color-input" name="color-strip-color-input" bind:value={$config.colorStripColor}>
-		{/if}
-	</Toggle>
-
-	<Toggle name="page-border-toggle" bind:checked={$config.includePageBorder}>Page Border</Toggle>
+	<summary>
+		Config
+		<button id="reset-button" on:click={reset}>Reset</button>
+	</summary>
 
 	<div>
-		<button id="print-button" on:click={printPage}><span class="material-symbols-outlined">print</span>Print</button>
-		<button id="reset-button" on:click={reset}>Reset</button>
+		<TypeSelector/>
+
+		<Toggle name="debug-toggle" bind:checked={$config.debug}>Debug Mode</Toggle>
+
+		<SliderNumberInput name="size" min="10" max={maxTagSize} step="0.1" bind:value={$config.tagDimensions}>Size (mm)</SliderNumberInput>
+		<TagRangeSelector/>
+
+		<LengthInput name="margin-selector" step="1" max=30 bind:value={$config.pageMargins}>Page Margin:</LengthInput>
+
+		<fieldset>
+			<legend>Printer Margin</legend>
+
+			<LengthInput name="printer-margin-x-selector" step="1" max=20 bind:value={$config.printerMarginX}>x:</LengthInput>
+			<LengthInput name="printer-margin-y-selector" step="1" max=20 bind:value={$config.printerMarginY}>y:</LengthInput>
+		</fieldset>
+
+		<fieldset disabled={!$config.dataToggles.enabled}>
+			<legend>
+				<Toggle name="labels-toggle" bind:checked={$config.dataToggles.enabled}>Tag Labels</Toggle>
+			</legend>
+
+			<Toggle name="type-label-toggle" bind:checked={$config.dataToggles.type}>Type</Toggle>
+			<Toggle name="index-label-toggle" bind:checked={$config.dataToggles.number}>Index</Toggle>
+			<Toggle name="dimensions-label-toggle" bind:checked={$config.dataToggles.dimensions}>Dimensions</Toggle>
+
+			<Toggle name="custom-label-toggle" bind:checked={$config.dataToggles.custom}>Custom
+				{#if $config.dataToggles.custom}
+					<input type="text" id="custom-label-input" name="custom-label-input" bind:value={$config.customTagLabel}>
+				{/if}
+			</Toggle>
+		</fieldset>
+
+		<Toggle name="color-strip-toggle" bind:checked={$config.colorStripEnabled}>Color Strip
+			{#if $config.colorStripEnabled}
+				<input type="color" id="color-strip-color-input" name="color-strip-color-input" bind:value={$config.colorStripColor}>
+			{/if}
+		</Toggle>
+
+		<Toggle name="page-border-toggle" bind:checked={$config.includePageBorder}>Page Border</Toggle>
+
+		<button id="print-button" on:click={printPage}><span class="material-icons md-18">print</span><span id="print-text">Print</span></button>
+			
+			
 	</div>
 	
 
@@ -131,8 +135,12 @@
 		overflow-y: auto;
 	}
 
-	input[type="number"] {
-		width: 4em;
+	#generator-config div {
+		display: flex;
+		flex-direction: column;
+		align-items: stretch;
+		justify-content: flex-start;
+		gap: 5px 0px;
 	}
 
 	details {
@@ -145,6 +153,7 @@
 	    font-weight: bold;
 	    margin: -.5em -.5em 0;
 	    padding: .5em;
+		position: relative;
 	}
 
 	details[open] {
@@ -158,18 +167,39 @@
 
 	button {
 		border: 1.5px solid black;
+		padding: 2px 5px;
+		border-radius: 5px;
+		
+		text-align: center;
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
 	}
 
 	#print-button {
 		background-color: lightgreen;
 	}
 
-	#print-button span {
-		height: 100%;
+	#print-text {
+		margin-left: 5px;
+		font-weight: bold;
+		font-size: 0.8em; 
+		line-height: 0.8em;
 	}
 
 	#reset-button {
-		background-color: salmon;
+		/* background-color: salmon; */
+		position: absolute;
+		right: 0.5em;
+		top: 50%;
+		transform: translate(0%, -50%);
+
+		display: none;
+	}
+
+	summary:hover #reset-button {
+		display: block;
 	}
 
 	input[type=color] {

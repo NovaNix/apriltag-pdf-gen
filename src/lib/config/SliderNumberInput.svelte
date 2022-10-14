@@ -28,11 +28,6 @@
         align-items: center;
     }
 
-    .number-input {
-        width: 5em;
-        flex-shrink: 0;
-    }
-
     .slider-input {
         flex-shrink: 1;
         width: 100%;
