@@ -95,8 +95,8 @@
     	border-width: 1px;
 
 		padding: var(--tag-padding-y) var(--tag-padding-x);
-		width: var(--tag-size);
-		height: var(--tag-size);
+		width: var(--tag-size-x);
+		height: var(--tag-size-y);
     	display: flex;
     	flex-direction: column;
     	justify-content: center;

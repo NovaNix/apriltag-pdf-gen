@@ -51,6 +51,7 @@
 			);
 
 			padding: var(--page-margin-y) var(--page-margin-x);
+			border: calc(var(--page-border) * var(--sim-scale)) solid black;
 		}
 
 		.page-content {
@@ -78,7 +79,7 @@
 	.printable-area {
 		width: 100%;
 		height: 100%;
-		border: calc(var(--page-border) * var(--sim-scale)) solid black;
+		
 		
 		box-sizing: border-box;
 	}
