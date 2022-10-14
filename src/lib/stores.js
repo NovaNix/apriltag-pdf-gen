@@ -36,7 +36,7 @@ function loadConfig()
 {
 	let savedConfig = JSON.parse(localStorage.getItem("apriltag-pdf-generator-config"));
 	
-	savedConfig = null;
+	//savedConfig = null;
 	if (savedConfig == null)
 	{
 		savedConfig = {};

@@ -79,23 +79,15 @@
 	<SliderNumberInput name="size" min="10" max={maxTagSize} step="0.1" bind:value={$config.tagDimensions}>Size (mm)</SliderNumberInput>
 	<TagRangeSelector/>
 
-	<div>
-		<label for="margin-selector">Page Margin (mm)</label>
-		<input type="number" id="margin-selector" name="margin" min="0" max="30" bind:value={$config.pageMargins}>
-	</div>
+	<LengthInput name="margin-selector" step="1" max=30 bind:value={$config.pageMargins}>Page Margin:</LengthInput>
 
 	<Toggle name="page-border-toggle" bind:checked={$config.includePageBorder}>Page Border</Toggle>
 
 	<fieldset>
-		<legend>Printer Margin (mm)</legend>
+		<legend>Printer Margin</legend>
 		
-		<div>
-			<LengthInput name="printer-margin-x-selector" step="1" max=20 bind:value={$config.printerMarginX}>x:</LengthInput>
-		</div>
-		<div>
-			<label for="printer-margin-selector">y:</label>
-			<input type="number" id="printer-margin-selector" name="printer-margin" min="0" step="1" bind:value={$config.printerMarginY}> mm
-		</div>
+		<LengthInput name="printer-margin-x-selector" step="1" max=20 bind:value={$config.printerMarginX}>x:</LengthInput>
+		<LengthInput name="printer-margin-y-selector" step="1" max=20 bind:value={$config.printerMarginY}>y:</LengthInput>
 	</fieldset>
 
 	<fieldset disabled={!$config.dataToggles.enabled}>

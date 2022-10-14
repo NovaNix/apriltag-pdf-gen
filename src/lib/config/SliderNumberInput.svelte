@@ -1,4 +1,6 @@
 <script>
+    import LengthInput from './LengthInput.svelte';
+
     export let name;
     
     export let min;
@@ -13,7 +15,8 @@
     <label for={name}><slot></slot></label>
     <div class="slider-num-input">
         <input type="range" class="slider-input" name={name} min={min} max={max} step={step} bind:value>
-        <input type="number" class="number-input" name={name} min={min} max={max} step={step} bind:value>
+        <LengthInput name={name} min={min} max={max} step={step} inputWidth={"5"} bind:value/>
+        <!-- <input type="number" class="number-input" name={name} min={min} max={max} step={step} bind:value> -->
     </div>
 </div>
 

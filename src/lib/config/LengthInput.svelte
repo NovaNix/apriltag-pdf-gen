@@ -8,13 +8,30 @@
     export let inputWidth = "5";
 
     export let value;
+
+    let rawValue; // The raw user input value. Will be passed to the export if it is valid
+
+    $: {
+        rawValue = value;
+    }
+
+    let inputElement;
+
+    // Checks to see if the raw value is valid, and if it is, set the value export to it
+    function updateValue()
+    {
+        if (inputElement.checkValidity())
+        {
+            value = rawValue;
+        }
+    }
+
 </script>
 
 <div>
-    <label for={name}><slot>Insert Label Text Here</slot></label>
-    <!-- <label class="unit-label" data-unit={unit} style="--unit-chars: {unit.length}"><input type="number" bind:value name={name} min={min} max={max} step={step}  /></label> -->
+    <label for={name}><slot></slot></label>
     <div class="length-input" style="--unit-chars: {unit.length}" data-unit={unit}>
-        <input type="number" style="--input-width: {inputWidth + "ch"}" bind:value name={name} min={min} max={max} step={step} />
+        <input type="number" style="--input-width: {inputWidth + "ch"}" bind:this={inputElement} bind:value={rawValue} on:input={updateValue} name={name} min={min} max={max} step={step} />
     </div>
 </div>
 
@@ -41,26 +58,12 @@
         box-sizing: border-box;
         width: calc(var(--input-width) + 3px + calc(2ch + calc(1ch * var(--unit-chars))));
     }
-
-    input::after {
-        content: "hello";
-        
-        
-    }
-
-    .unit-label::after {
-        content: attr(data-unit);
-        position: absolute;
-        top: 4px;
-        /* left: calc(1ch * var(--unit-chars)); */
-        text-align: right;
-        right: 0;
-        font-size: 12px;
-        display: block;
-        color: rgba(0, 0, 0, 0.6);
-        font-weight: bold;
-    }
     
+    input:invalid {
+        border: none;
+        outline: 2px solid red;
+    }
+
     /* Chrome, Safari, Edge, Opera */
     input::-webkit-outer-spin-button,
     input::-webkit-inner-spin-button {
