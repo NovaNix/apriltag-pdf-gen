@@ -19,6 +19,8 @@
 
 	h1 {
 		margin: 0.5em;
+		flex-grow: 0;
+		flex-shrink: 0;
 	}
 
 	#side-panel {
@@ -32,6 +34,9 @@
 	    width: 20%;
 	    height: 100%;
 
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
 		
 		position: relative;
 		box-sizing: border-box;
@@ -39,10 +44,9 @@
 
 	#sidebar-content {
 		overflow-y: auto;
-		/* height: calc(100% - 2em); */
-		max-height: 100%;
-		
+
 		box-sizing: border-box;
+		flex-grow: 1;
 	}
 
 	h1 {

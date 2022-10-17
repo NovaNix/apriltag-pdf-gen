@@ -8,10 +8,13 @@
 
 <style>
     aside {
-        position: absolute;
-        bottom: 0;
+        /* position: absolute;
+        bottom: 0; */
         width: 100%;
         height: 2em;
+
+        flex-grow: 0;
+        flex-shrink: 0;
 
         background-color: white;
         border: 1px solid #aaa;
