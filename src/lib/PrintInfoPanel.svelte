@@ -2,7 +2,7 @@
 	import {config, previewInfo} from './stores.js';
 </script>
 
-<details id="print-info">
+<details id="print-info" open>
 	<summary>Print Info</summary>
 	<div>
 		<p>{$previewInfo.pages} pages, {$config.tagCount} tags</p>
