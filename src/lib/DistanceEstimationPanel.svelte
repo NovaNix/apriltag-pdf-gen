@@ -2,6 +2,7 @@
 
 	import {config} from './stores.js';
 	import {tagData} from "./preview/Tag.svelte";
+	import LengthInput from "./config/LengthInput.svelte"
 
 	// All of this is pulled from https://optitag.io/blogs/news/designing-your-perfect-apriltag
 
@@ -17,11 +18,17 @@
 
 <details>
 	<summary>Distance Estimation</summary>
-	<label for="hfov-input">Horizontal FOV (Degrees)</label>
-	<input type="number" id="hfov-input" bind:value={hFOV} min="0" max="180" step="1">
-	<label for="hres-input">Horizontal Resolution (Pixels)</label>
-	<input type="number" id="hres-input" bind:value={hResolution} min="0" max="10000" step="1">
-	<output>Maximum Detection Distance: {maxDetectionDistance}</output>
+	<div>
+		<p>This section lets you estimate the maximum detection range of your tag based on its size and the specs of your camera.</p>
+		
+		<fieldset>
+			<legend>Camera Specs</legend>
+			<LengthInput name="hfov-input" step="0.5" max="180" unit="°" bind:value={hFOV}>Horizontal FOV: </LengthInput>
+			<LengthInput name="hres-input" step="1" max="10000" unit="px" bind:value={hResolution}>Horizontal Resolution</LengthInput>
+		</fieldset>
+		
+		<p>Maximum Detection Distance: <output>{Math.round((maxDetectionDistance + Number.EPSILON) * 100) / 100}m</output></p>
+	</div>
 </details>
 
 <style>
@@ -44,5 +51,19 @@
 	details[open] summary {
 	    border-bottom: 1px solid #aaa;
     	margin-bottom: .5em;
+	}
+
+	details div {
+		padding: 0.5em;
+		display: flex;
+		flex-direction: column;
+		align-items: stretch;
+		justify-content: flex-start;
+		gap: 5px 0px;
+	}
+
+	p {
+		margin: 0;
+
 	}
 </style>
