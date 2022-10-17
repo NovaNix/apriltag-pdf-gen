@@ -38,7 +38,7 @@
 
 		if (value.tagDimensions > maxTagSize)
 		{
-			$config.tagDimensions = maxTagSize;
+			$config.tagDimensions = Math.min(+maxTagSize.toFixed(2), maxTagSize); // Fix issues with an infinite loop created by toFixed rounding errors
 		}
 
 		if (value.startingIndex > (tagData[$config.tagType].count - 1))
@@ -80,7 +80,7 @@
 
 		<Toggle name="debug-toggle" bind:checked={$config.debug}>Debug Mode</Toggle>
 
-		<SliderNumberInput name="size" min="10" max={maxTagSize} step="0.1" bind:value={$config.tagDimensions}>Size (mm)</SliderNumberInput>
+		<SliderNumberInput name="size" min="10" max={maxTagSize} step="0.01" bind:value={$config.tagDimensions}>Size (mm)</SliderNumberInput>
 		<TagRangeSelector/>
 
 		<LengthInput name="margin-selector" step="1" max=30 bind:value={$config.pageMargins}>Page Margin:</LengthInput>
