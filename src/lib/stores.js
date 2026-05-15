@@ -6,28 +6,30 @@ class Config
 	tagType= "tagStandard41h12";
 	
 	tagDimensions= 100;
+
+	pageWidth = 215.9; 
+    pageHeight = 279.4;
+	pageMargins = 25;
 	
-	pageMargins= 25;
+	printerMarginX = 0;
+	printerMarginY = 0;
 	
-	printerMarginX= 0;
-	printerMarginY= 0;
+	startingIndex = 0;
+	tagCount = 1;
 	
-	startingIndex= 0;
-	tagCount= 1;
+	includePageBorder = true;
 	
-	includePageBorder= true;
-	
-	dataToggles= {
+	dataToggles = {
 		enabled: true,
 		type: true,
 		number: true,
 		dimensions: true,
 		custom: false
 	};
-	customTagLabel= "";
+	customTagLabel = "";
 	
-	colorStripEnabled= false;
-	colorStripColor= "#ff0000";
+	colorStripEnabled = false;
+	colorStripColor = "#ff0000";
 	
 	debug= false;
 }
@@ -64,6 +66,10 @@ export const previewInfo = writable({
 export const config = writable(loadConfig());
 
 config.subscribe(value => {
+    setCSSVariable('--page-width', value.pageWidth + "mm");
+    setCSSVariable('--page-height', value.pageHeight + "mm");
+    setCSSVariable('--page-aspect-ratio', value.pageWidth / value.pageHeight);
+
 	setCSSVariable('--true-tag-size', value.tagDimensions + "mm");
 	setCSSVariable('--true-page-margin', value.pageMargins + 'mm');
 	setCSSVariable('--printer-margin-x', value.printerMarginX + 'mm');
@@ -73,17 +79,17 @@ config.subscribe(value => {
 
 	setCSSVariable('--color-strip-color', value.colorStripColor);
 
-	let contentAreaWidth = pageWidth - (2 * value.printerMarginX);
-	let contentAreaHeight = pageHeight - (2 * value.printerMarginY);
+	let contentAreaWidth = value.pageWidth - (2 * value.printerMarginX);
+    let contentAreaHeight = value.pageHeight - (2 * value.printerMarginY);
 
-	setCSSVariable('--x-scale', Math.max(pageWidth / contentAreaWidth, 0));
-	setCSSVariable('--y-scale', Math.max(pageHeight / contentAreaHeight, 0));
+	setCSSVariable('--x-scale', Math.max(value.pageWidth / contentAreaWidth, 0));
+    setCSSVariable('--y-scale', Math.max(value.pageHeight / contentAreaHeight, 0));
 
 	previewInfo.update(info => {
-		info.scaleX = (pageWidth / contentAreaWidth);
-		info.scaleY = (pageHeight / contentAreaHeight);
-		return info;
-	});
+        info.scaleX = (value.pageWidth / contentAreaWidth);
+        info.scaleY = (value.pageHeight / contentAreaHeight);
+        return info;
+    });
 
 	// Save the config
 	localStorage.setItem("apriltag-pdf-generator-config", JSON.stringify(value));
@@ -103,7 +109,15 @@ previewInfo.subscribe(value => {
 export const previewWidth = writable(1);
 previewWidth.subscribe(value => {
 	previewInfo.update(info => {
-		info.scale=(value / (8.5 * 96));
+        const screenDpi = 96; 
+        const mmToPx = screenDpi / 25.4;
+		const actualPageWidthPx = pageWidth * mmToPx;
+
+            if (value < actualPageWidthPx) {
+                info.scale = value / actualPageWidthPx;
+            } else {
+                info.scale = 1.0; // Stay "true size" if there is enough room
+            }
 		return info;
 	});
 });
