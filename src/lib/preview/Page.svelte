@@ -1,6 +1,6 @@
 <script context="module">
-	export const pageWidth = 215.9; // The width of a page in mm
-	export const pageHeight = 279.4; // The height of a page in mm
+	export let pageWidth = 215.9; // The width of a page in mm
+	export let pageHeight = 279.4; // The height of a page in mm
 </script>
 
 <script>
@@ -27,12 +27,16 @@
 <style>
 	@media screen {
 		.page {
+            width: var(--page-width);
+            height: var(--page-height);
+            aspect-ratio: var(--page-aspect-ratio);
+            box-sizing: border-box;
 			background-color: var(--printer-margin-color);
 			margin: 0;
 			margin-left: auto;
 			margin-right: auto;
 			margin-bottom: 1em;
-			max-width: 8.5in;
+            display: block; /* Ensures auto-margins work on a block-level element */
 			/* Add a shadow to make it stand out a little */
 			box-shadow: 0 0 0.5em 0.5em gray;
 			
@@ -80,7 +84,6 @@
 		width: 100%;
 		height: 100%;
 		
-		
 		box-sizing: border-box;
 	}
 
@@ -92,12 +95,16 @@
 	}
 
 	@media print {
+        @page {
+            size: var(--page-height) var(--page-width);
+        }
+
 		.page {
-			width: 8.5in;
-			height: 11in;
+			width: var(--page-width);
+            height: var(--page-height);
 			break-after: always;
 			padding: var(--page-margin-y) var(--page-margin-x);
-			
+			box-sizing: border-box !important;
 			border-top: calc(var(--page-border) * var(--y-scale)) solid black;
 			border-bottom: calc(var(--page-border) * var(--y-scale)) solid black;
 			border-left: calc(var(--page-border) * var(--x-scale)) solid black;

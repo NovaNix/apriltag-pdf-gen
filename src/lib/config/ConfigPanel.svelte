@@ -8,29 +8,27 @@
 	import {pageWidth, pageHeight} from "../preview/Page.svelte";
     import SliderNumberInput from './SliderNumberInput.svelte';
     import LengthInput from './LengthInput.svelte';
+    import PageSelector from './PageSelector.svelte';
 
 	let maxTagSize = calculateMaxTagSize();
 
-	function calculateMaxTagSize()
-	{
-		let marginSizeX = ($config.pageMargins * 2) + ($config.printerMarginX * 2);
-		let marginSizeY = ($config.pageMargins * 2) + ($config.printerMarginY * 2);
+	function calculateMaxTagSize() {
+        let marginSizeX = ($config.pageMargins * 2) + ($config.printerMarginX * 2);
+        let marginSizeY = ($config.pageMargins * 2) + ($config.printerMarginY * 2);
 
-		if ($config.includePageBorder)
-		{
-			marginSizeX += 2;
-			marginSizeY += 2;
-		}
+        if ($config.includePageBorder) {
+            marginSizeX += 2;
+            marginSizeY += 2;
+        }
 
-		let usableWidth = (pageWidth - marginSizeX);
-		let usableHeight = (pageHeight - marginSizeY);
+        let usableWidth = ($config.pageWidth - marginSizeX);
+        let usableHeight = ($config.pageHeight - marginSizeY);
 
-		// Calculate the max width and height by accounting for tag margins
-		let maxWidth = (usableWidth * 5) / 6;
-		let maxHeight = (usableHeight * 5) / 6;
+        let maxWidth = (usableWidth * 5) / 6;
+        let maxHeight = (usableHeight * 5) / 6;
 
-		return Math.min(maxWidth, maxHeight);
-	}
+        return Math.min(maxWidth, maxHeight);
+    }
 
 	// Handle updating the config constraints to match other config settings
 	config.subscribe((value) => {
@@ -76,8 +74,10 @@
 	</summary>
 
 	<div>
+    <div>
+		
 		<TypeSelector/>
-
+        <PageSelector/> 
 		<Toggle name="debug-toggle" bind:checked={$config.debug}>Debug Mode</Toggle>
 
 		<SliderNumberInput name="size" min="10" max={maxTagSize} step="0.01" bind:value={$config.tagDimensions}>Size (mm)</SliderNumberInput>
