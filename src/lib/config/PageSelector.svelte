@@ -5,8 +5,8 @@
 	// Define standard paper sizes in mm
 	const paperSizes = [
 		{ name: 'US Letter', width: 215.9, height: 279.4 },
-		{ name: 'A4', width: 210, height: 297 },
 		{ name: 'US Legal', width: 215.9, height: 355.6 },
+		{ name: 'A4', width: 210, height: 297 },
 		{ name: 'A3', width: 297, height: 420 },
 	];
 
