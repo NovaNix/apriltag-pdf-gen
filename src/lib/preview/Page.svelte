@@ -27,8 +27,8 @@
 <style>
 	@media screen {
 		.page {
-            width: var(--page-width);
-            height: var(--page-height);
+            width: calc(var(--page-width) * var(--sim-scale));
+            height: calc(var(--page-height) * var(--sim-scale));
             aspect-ratio: var(--page-aspect-ratio);
             box-sizing: border-box;
 			background-color: var(--printer-margin-color);

@@ -26,7 +26,7 @@
 
         let maxWidth = (usableWidth * 5) / 6;
         let maxHeight = (usableHeight * 5) / 6;
-
+        
         return Math.min(maxWidth, maxHeight);
     }
 

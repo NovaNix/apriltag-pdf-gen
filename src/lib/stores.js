@@ -109,7 +109,15 @@ previewInfo.subscribe(value => {
 export const previewWidth = writable(1);
 previewWidth.subscribe(value => {
 	previewInfo.update(info => {
-		info.scale=(value / (8.5 * 96));
+        const screenDpi = 96; 
+        const mmToPx = screenDpi / 25.4;
+		const actualPageWidthPx = pageWidth * mmToPx;
+
+            if (value < actualPageWidthPx) {
+                info.scale = value / actualPageWidthPx;
+            } else {
+                info.scale = 1.0; // Stay "true size" if there is enough room
+            }
 		return info;
 	});
 });
